@@ -15,6 +15,7 @@ import UpdateTheater from './pages/Theater/UpdateTheater';
 import AddManager from './pages/Manager/AddManager';
 import DisplayManager from './pages/Manager/DisplayAll';
 import UpdateManager from './pages/Manager/UpdateManager';
+import Popup from './components/Popup';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/new-manager" element={<AddManager />} />
           <Route path="/manager" element={<DisplayManager />} />
           <Route path="/update-manager/:id" element={<UpdateManager />} />
+          <Route path="/popup" element={<Popup />} />
         </Routes>
       </Router>
     </>
