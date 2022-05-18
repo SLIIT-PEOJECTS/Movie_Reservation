@@ -36,7 +36,7 @@ function Header(prop) {
             <Nav.Link href="#movie-list">Trending Movies</Nav.Link>
             <Nav.Link >Halls</Nav.Link>
             {/* disabled */}
-            <Nav.Link onClick={() => routeChange('cart')}>
+            <Nav.Link onClick={() => routeChange('/cart')}>
               My Cart
             </Nav.Link>
           </Nav>
