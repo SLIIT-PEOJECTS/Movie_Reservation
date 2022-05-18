@@ -378,6 +378,7 @@ const AddMovie = () => {
                                                 <option value="English">English</option>
                                                 <option value="Tamil">Tamil</option>
                                                 <option value="Spanish">Spanish</option>
+                                                <option value="Chinese">Chinese</option>
                                             </select>
                                         </div>
                                     </div>
@@ -406,7 +407,7 @@ const AddMovie = () => {
                                     <div class="col">
                                         <div className="form-group">
                                             <label className="text-muted">Director</label>
-                                            <input onChange={handleChange("director")} value={director} type="text" className="form-control" placeholder="Enter the Director" pattern="[A-Za-z]{1,250}" title="Characters can only be A-Z and a-z and must be less than 250 characters." required />
+                                            <input onChange={handleChange("director")} value={director} type="text" className="form-control" placeholder="Enter the Director" pattern="[A-Za-z]+{1,250}" title="Characters can only be A-Z and a-z and must be less than 250 characters." required />
                                         </div>
                                     </div>
                                     <div class="col">

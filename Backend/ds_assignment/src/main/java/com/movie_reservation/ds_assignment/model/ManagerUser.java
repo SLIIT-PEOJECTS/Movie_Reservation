@@ -23,8 +23,9 @@ public class ManagerUser {
     private String type;
     private String accountStatus;
     private String profileURL;
+    private String password;
 
-    public ManagerUser(String id, String firstName, String middleName, String lastName, String mobileNumber, String email, Date DOB, String NIC, String address, String type, String accountStatus, String profileURL) {
+    public ManagerUser(String id, String firstName, String middleName, String lastName, String mobileNumber, String email, Date DOB, String NIC, String address, String type, String accountStatus, String profileURL, String password) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -37,6 +38,7 @@ public class ManagerUser {
         this.type = type;
         this.accountStatus = accountStatus;
         this.profileURL = profileURL;
+        this.password = password;
     }
 
     public String getId() {
@@ -133,5 +135,13 @@ public class ManagerUser {
 
     public void setProfileURL(String profileURL) {
         this.profileURL = profileURL;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

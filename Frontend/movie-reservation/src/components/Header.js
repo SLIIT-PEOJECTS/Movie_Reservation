@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
 
 function Header(prop) {
-  let navigate = useNavigate(); 
-  const routeChange = (props) =>{ 
+  let navigate = useNavigate();
+  const routeChange = (props) => {
     console.log(props);
     navigate(props);
   }
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding:'10px' }}>
+    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: '10px' }}>
       <Container fluid>
         <Navbar.Brand>
           <img
@@ -24,7 +24,7 @@ function Header(prop) {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Navbar.Brand style={{ fontWeight:"bold", fontSize:'2rem', color:"#8eaccb	" }}>{prop.tab}</Navbar.Brand>
+        <Navbar.Brand style={{ fontWeight: "bold", fontSize: '2rem', color: "#8eaccb	" }}>{prop.tab}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -32,11 +32,11 @@ function Header(prop) {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link onClick={() => routeChange('/')} >Home</Nav.Link>
+            <Nav.Link onClick={() => routeChange('/home')} >Home</Nav.Link>
             <Nav.Link href="#movie-list">Trending Movies</Nav.Link>
             <Nav.Link >Halls</Nav.Link>
             {/* disabled */}
-            <Nav.Link  onClick={() => routeChange('cart')}> 
+            <Nav.Link onClick={() => routeChange('cart')}>
               My Cart
             </Nav.Link>
           </Nav>
@@ -49,7 +49,7 @@ function Header(prop) {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
-          <Button variant="danger" style={{ marginLeft:'2rem'}}  onClick={() => routeChange('login')}>Login/Signup</Button>
+          <Button variant="danger" style={{ marginLeft: '2rem' }} onClick={() => routeChange('/login')}>Login/Signup</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
