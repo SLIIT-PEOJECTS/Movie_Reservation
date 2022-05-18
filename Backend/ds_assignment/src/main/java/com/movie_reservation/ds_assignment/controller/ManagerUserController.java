@@ -2,14 +2,13 @@ package com.movie_reservation.ds_assignment.controller;
 
 import com.movie_reservation.ds_assignment.model.ManagerUser;
 import com.movie_reservation.ds_assignment.repository.ManagerUserRepository;
+import com.movie_reservation.ds_assignment.service.Impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -27,10 +26,18 @@ public class ManagerUserController {
     @PostMapping("/")
     public ResponseEntity<ManagerUser> createManager(@RequestBody ManagerUser managerUser) {
         try {
-            ManagerUser managerList = managerUserRepository.save(new ManagerUser(managerUser.getId(), managerUser.getFirstName(), managerUser.getMiddleName(), managerUser.getLastName(), managerUser.getMobileNumber(), managerUser.getEmail(), managerUser.getDOB(), managerUser.getNIC(), managerUser.getAddress(), "manager", managerUser.getAccountStatus(), managerUser.getProfileURL()));
+            ManagerServiceImpl managerService = new ManagerServiceImpl();
+            String username = managerUser.getFirstName()+managerUser.getLastName();
+            String password = managerService.generatePassayPassword();
+            ManagerUser managerList = managerUserRepository.save(new ManagerUser(managerUser.getId(), managerUser.getFirstName(), managerUser.getMiddleName(), managerUser.getLastName(), managerUser.getMobileNumber(), managerUser.getEmail(), managerUser.getDOB(), managerUser.getNIC(), managerUser.getAddress(), "manager", managerUser.getAccountStatus(), managerUser.getProfileURL(), password));
             return new ResponseEntity<>(managerList, HttpStatus.CREATED);
-        } catch (Exception e) {
-            System.out.println("Error :- " + e.getMessage());
+        }
+        catch(DuplicateKeyException e) {
+            System.out.println("Error :- " + e);
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        }
+        catch (Exception e) {
+            System.out.println("Error :- " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -93,6 +100,7 @@ public class ManagerUserController {
             managerList.setType(managerUser.getType());
             managerList.setAccountStatus(managerUser.getAccountStatus());
             managerList.setProfileURL(managerUser.getProfileURL());
+            managerList.setPassword(managerUser.getPassword());
             return new ResponseEntity<>(managerUserRepository.save(managerList), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
