@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Footer from './Footer';
 import Header from './Header';
 import "../asset/css/Home.css";
@@ -7,10 +8,27 @@ import { Carousel, Container, Row, Col, Card, ListGroup, ListGroupItem, Button} 
 import {CartPlusFill} from 'react-bootstrap-icons';
 
 function Home() {
+    const [post, setPost] = React.useState('');
+
+    const getMovie = 'http://localhost:8081/movie/available';
+     
+    const getMovieList = () =>{
+        axios.get(`${getMovie}`).then((res)=>{
+            console.log(res.data[2]);
+            setPost(res.data[2]);
+        }).catch(error => console.error(`Error: ${error}`));
+    }
+
+    console.log(URL);
+
+    useEffect(()=>{
+        getMovieList();
+    },[])
+
   return (      
     <div className="wrapper">
         <Header tab="X-trem Movie Hub"/>
-        <div class="carousel">
+        <div className="carousel">
         <Carousel>
                 <Carousel.Item>
                     <img
@@ -49,7 +67,7 @@ function Home() {
                 </Carousel.Item>
             </Carousel>
         </div>
-        <div class="middle-view" id='movie-list'>
+        <div className="middle-view" id='movie-list'>
         <Container>
             <Row>
                 <Col>
@@ -73,7 +91,7 @@ function Home() {
                 </Col>
                 <Col>
                 <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://cdn.wallpapersafari.com/71/79/ABPkK1.jpg" />
+                        <Card.Img variant="top" src={post.movieURL} />
                         <Card.Body>
                             <Card.Title>Movie Name</Card.Title>
                             <Card.Text>
