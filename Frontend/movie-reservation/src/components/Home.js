@@ -102,7 +102,7 @@ function Home(props) {
                     variant="secondary"
                     size="sm"
                     style={{ width: "16rem", marginLeft: "1rem" }}
-                    onClick={() => {navigate('view');}}
+                    onClick={() => {navigate('/view');}}
                   >
                     View Movie{" "}
                   </Button>
