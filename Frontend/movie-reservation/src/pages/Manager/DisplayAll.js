@@ -1,3 +1,8 @@
+/*
+    Created by - Isuru Pathum Herath
+    Name - Display Manager
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from "sweetalert";

@@ -1,3 +1,8 @@
+/*
+    Created by - Isuru Pathum Herath
+    Name - Session Manager using Session Storage
+ */
+
 //save login response > (user's name and token) to session storage
 export const authenticate = (response, next) => {
     if (window !== 'undefined') {
