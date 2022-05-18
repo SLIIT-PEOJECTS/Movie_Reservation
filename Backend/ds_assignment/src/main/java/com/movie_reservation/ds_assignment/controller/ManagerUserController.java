@@ -1,5 +1,6 @@
 package com.movie_reservation.ds_assignment.controller;
 
+import com.movie_reservation.ds_assignment.model.Login;
 import com.movie_reservation.ds_assignment.model.ManagerUser;
 import com.movie_reservation.ds_assignment.repository.ManagerUserRepository;
 import com.movie_reservation.ds_assignment.service.Impl.ManagerServiceImpl;
@@ -39,6 +40,19 @@ public class ManagerUserController {
         catch (Exception e) {
             System.out.println("Error :- " + e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ManagerUser> loginManager(@RequestBody Login login) {
+        System.out.println("Email: " + login.getEmail());
+        System.out.println("Passowrd: " + login.getPassword());
+
+        Optional<ManagerUser> managerUser = managerUserRepository.findByEmailAndPassword(login.getEmail(), login.getPassword());
+        if (managerUser.isPresent()) {
+            return new ResponseEntity<>(managerUser.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
