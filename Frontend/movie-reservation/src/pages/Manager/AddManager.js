@@ -1,3 +1,8 @@
+/*
+    Created by - Isuru Pathum Herath
+    Name - Add Manager
+ */
+
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
@@ -128,14 +133,25 @@ const AddManager = () => {
 
             })
             .catch((error) => {
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.error}`,
-                    // text: `${error.response.data.error}`,
-                    footer: 'Please try again'
-                })
-                // alert(error.response.data.error);
+                console.log(error.response.status);
+                if (error.response.status === 406) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `Duplicate Email Address`,
+                        // text: `${error.response.data.error}`,
+                        footer: 'Please try again'
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${error.code}`,
+                        // text: `${error.response.data.error}`,
+                        footer: 'Please try again'
+                    })
+                    // alert(error.response.data.error);
+                }
+
             });
     };
 
