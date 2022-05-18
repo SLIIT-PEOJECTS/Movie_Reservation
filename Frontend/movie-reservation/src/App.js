@@ -18,6 +18,7 @@ import UpdateManager from './pages/Manager/UpdateManager';
 import AdminLogin from './pages/Manager/Login';
 import PrivateRoute from './Services/PrivateRouteManager';
 import { getUser } from './Services/SessionManager';
+import Popup from './components/Popup';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
-
+          <Route path="/popup" element={<Popup />} />
         </Routes>
       </Router>
     </>
