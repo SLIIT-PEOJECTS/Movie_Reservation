@@ -7,8 +7,7 @@ import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstr
 
 function Header(prop) {
   let navigate = useNavigate(); 
-  const routeChange = (props) =>{ 
-    console.log(props);
+  const routeChange = (props) =>{
     navigate(props);
   }
 
