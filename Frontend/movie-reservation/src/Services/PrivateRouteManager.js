@@ -11,7 +11,7 @@ import { getUser } from './SessionManager';
 const ProtectedRoutes = () => {
 
     const auth = getUser()
-    return auth ? <Outlet /> : <Navigate to="/admin-login" />
+    return auth ? <Outlet /> : <Navigate to="/home" />
 }
 
 export default ProtectedRoutes;
