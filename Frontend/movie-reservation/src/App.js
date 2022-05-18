@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Switch, Route, Link} from 'react-router
 import Home from './components/Home';
 import Login from './components/Login';
 import Cart from './components/Cart';
+import Register from "./components/Registration";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
     </>

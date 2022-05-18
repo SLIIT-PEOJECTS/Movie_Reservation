@@ -1,52 +1,62 @@
 package com.movie_reservation.ds_assignment.controller;
 
+import com.movie_reservation.ds_assignment.model.Tutorial;
 import com.movie_reservation.ds_assignment.model.User;
-import com.movie_reservation.ds_assignment.service.UserService;
+import com.movie_reservation.ds_assignment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
-    @RequestMapping("/create")
-    public String create(String firstName, String lastName, String tel, String email, String password){
-        User u = userService.create(firstName, lastName, tel,email,password);
-        return u.toString();
+    @PostMapping("/create")
+    public void createUser(@RequestBody User user) {
+        userRepository.insert(user);
     }
 
-    @RequestMapping("/get")
-    public User getUser(@RequestParam String firstName){
-        return userService.getByFirstName(firstName);
+    @PostMapping("/delete/{id}")
+    public void deleteUser(@PathVariable String id) {
+        userRepository.deleteById(id);
     }
 
-    @RequestMapping("/getAll")
-    public List<User> getAll(){
-        return userService.getall();
+    @GetMapping("/list")
+    public List<User> listUsers() {
+        return userRepository.findAll();
     }
 
-    @RequestMapping("/update")
-    public String update(@RequestParam String firstName, String lastName, String tel, String email, String password){
-        User u=userService.update(firstName,lastName,tel,email,password);
-        return u.toString();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+        Optional<User> UserData = userRepository.findById(id);
+        if (UserData.isPresent()) {
+            User _user = UserData.get();
+            _user.setFirstName(user.getFirstName());
+            _user.setLastName(user.getLastName());
+            _user.setTel(user.getTel());
+            return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @RequestMapping("/delete")
-    public String delete(@RequestParam String firstName){
-        userService.delete(firstName);
-        return "Deleted";
-    }
-
-    @RequestMapping("/deleteall")
-    public String deleteAll() {
-        userService.deleteAll();
-        return "Deleted all records";
+    @PutMapping("/password/{id}")
+    public ResponseEntity<User> updatePass(@PathVariable("email") String email, @RequestBody User user) {
+        Optional<User> UserData = userRepository.findById(email);
+        if (UserData.isPresent()) {
+            User _user = UserData.get();
+            _user.setPassword(user.getPassword());
+            return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
