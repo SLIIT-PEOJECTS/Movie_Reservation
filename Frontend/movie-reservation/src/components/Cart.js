@@ -1,5 +1,6 @@
-import { React, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import axios from 'axios';
 import Header from "./Header";
 import Footer from "./Footer";
 import "../asset/css/Cart.css";
@@ -7,17 +8,60 @@ import { Cart } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TrashFill } from "react-bootstrap-icons";
 import { Button, Modal, Form,} from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
 
 function Carts() {
+  let {moviename} = useParams();
+
   const navigate = useNavigate();
+  var theater;
+  var session;
+
+  const [sessions, setSessions] = React.useState([]);
+  const [theaters, setTheaters] = React.useState([]);
+  const [radioValue, setRadioValue] = useState(0);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
+  const getSession = 'http://localhost:8081/session/.';
+
+  const getTheater = 'http://localhost:8081/theater/';
+     
+  const getSessionList = () =>{
+    axios.get(`${getSession}`).then((res)=>{
+        setSessions(res.data);
+    }).catch(error => console.error(`Error: ${error}`));    
+  }
+
+  const getTheaterList = () =>{
+    axios.get(`${getTheater}`).then((res)=>{
+      setTheaters(res.data);
+    }).catch(error => console.error(`Error: ${error}`))
+  }
+
+  const onChangeTheater = (ev) => {
+    theater=ev.target.value;
+    console.log(theater);
+  };
+
+  const onChangeSession = (ev) => {
+    session=ev.target.value;
+    console.log(session);
+  };
+
+  const onClickPayment = (ev) => {    
+    setShow(false);
+  };
+
+  useEffect(()=>{
+    getSessionList();
+    getTheaterList();
+  },[])
+
   return (
     <div className="App">
       <Header tab="My Cart" />
@@ -48,17 +92,17 @@ function Carts() {
                         <figure class="itemside">
                           <div class="aside">
                             <img
-                              src="https://wallpapercave.com/wp/wp4399797.jpg"
+                              src="https://cdn.pixabay.com/photo/2016/03/31/18/36/cinema-1294496__340.png"
                               class="img-sm"
                               style={{ width: "3rem" }}
                             />
                           </div>
                           <figcaption class="info">
                             <a href="#" class="title text-dark">
-                              Some name of item goes here nice
+                              {moviename}
                             </a>
                             <p class="text-muted small">
-                              description and details <br /> goes here
+                              choose tickect amount <br /> pay with your card
                             </p>
                           </figcaption>
                         </figure>
@@ -106,11 +150,18 @@ function Carts() {
                 </table>
 
                 <div class="card-body border-top">
-                  <a href="#" class="btn btn-primary float-md-right">
+                  <a href="https://sandbox.payhere.co/your-co/payment-link-name?amount_in_cents=4200&hide_amount=yes" class="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i class="fa fa-chevron-right"></i>{" "}
+                    
                   </a>
-                  <a href="#" class="btn btn-light" onClick={() => {navigate(`/home`);}}>
+                  <a
+                    href="#"
+                    class="btn btn-light"
+                    onClick={() => {
+                      navigate(`/home`);
+                    }}
+                  >
                     {" "}
                     <i class="fa fa-chevron-left"></i> Continue shopping{" "}
                   </a>
@@ -119,9 +170,10 @@ function Carts() {
 
               <div class="alert alert-success mt-3">
                 <span>
-                <p class="icontext">
-                  <i class="icon text-success fa fa-truck"></i> Happy Movie Hour
-                </p>
+                  <p class="icontext">
+                    <i class="icon text-success fa fa-truck"></i> Happy Movie
+                    Hour
+                  </p>
                 </span>
               </div>
             </main>
@@ -132,13 +184,13 @@ function Carts() {
                     <div class="form-group">
                       <label>Scan Here For E-Purchase</label>
                       <div class="qr-view">
-                          <QRCode
-                        id="qr-gen"
-                        value={"hello manul"}
-                        size={200}
-                        level={"H"}
-                        includeMargin={true}
-                      />
+                        <QRCode
+                          id="qr-gen"
+                          value={`Thank You For Booking Ticket For ${theater} + ${session} - From ${sessions.fromTime} To ${sessions.toTime}`}
+                          size={200}
+                          level={"H"}
+                          includeMargin={true}
+                        />
                       </div>
                     </div>
                   </form>
@@ -178,23 +230,44 @@ function Carts() {
       {/* popup model */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title><h2>Select Your Movie Session</h2></Modal.Title>
+          <Modal.Title>
+            <h2>Select Your Movie Session</h2>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            BrowserRouter
-          </Form>
+          {sessions.map((data) => ( 
+            <Form.Check
+            name="group1"
+            type='radio'
+            id='session'
+            value={`${data.sessionName}`}
+            onChange={onChangeSession}
+            label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
+          />
+          ))}   
+
+          {theaters.map((data) => (
+            <Form.Check
+            name="group2"
+            type='radio'
+            id='theater'
+            onChange={onChangeTheater}
+            value={`${data.name}`}
+            label={`${data.name} - ${data.address} ${data.city}`}
+          />
+          ))}        
+        </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={onClickPayment}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-
     </div>
   );
 }
