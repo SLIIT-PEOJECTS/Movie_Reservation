@@ -1,6 +1,8 @@
 package com.movie_reservation.ds_assignment.controller;
 
+import com.movie_reservation.ds_assignment.model.Cart;
 import com.movie_reservation.ds_assignment.model.Movie;
+import com.movie_reservation.ds_assignment.repository.CartRepository;
 import com.movie_reservation.ds_assignment.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,137 +15,101 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("/movie")
-public class MovieController {
+@RequestMapping("/cart")
+public class CartController {
 
     @Autowired
-    MovieRepository movieRepository;
-
-    /*
-        Method - Create Movie
-        By - Isuru Pathum Herath
-    */
+    CartRepository cartRepository;
 
     @PostMapping("/")
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
         try {
-            Movie movieList = movieRepository.save(new Movie(movie.getId(), movie.getName(), movie.getDescription(), movie.getGenre(), movie.getRating(), movie.getReleaseDate(), movie.getLanguage(), movie.getTags(), movie.getDirector(), movie.getCast(), movie.getAvailable(), movie.getMovieURL()));
-            return new ResponseEntity<>(movieList, HttpStatus.CREATED);
+            Cart cartList = cartRepository.save(new Cart(cart.getId(), cart.getUserId(), cart.getMovieId(), cart.getMovieName(), cart.getMoviePrice()));
+            return new ResponseEntity<>(cartList, HttpStatus.CREATED);
         } catch (Exception e) {
             System.out.println("Error :- " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    /*
-        Method - Get All Movies
-        By - Isuru Pathum Herath
-    */
-
     @GetMapping("/")
-    public ResponseEntity<List<Movie>> getAllMovies(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<Cart>> getAllCarts(@RequestParam(required = false) String movieName) {
         try {
-            List<Movie> movies = new ArrayList<Movie>();
-            if (title == null)
-                movieRepository.findAll().forEach(movies::add);
+            List<Cart> cart = new ArrayList<Cart>();
+            if (movieName == null)
+                cartRepository.findAll().forEach(cart::add);
             else
-                movieRepository.findByNameContaining(title).forEach(movies::add);
-            if (movies.isEmpty()) {
+                cartRepository.findByMovieNameContaining(movieName).forEach(cart::add);
+            if (cart.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(movies, HttpStatus.OK);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    /*
-        Method - Get Movie by Id
-        By - Isuru Pathum Herath
-    */
-
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id) {
-        Optional<Movie> movies = movieRepository.findById(id);
-        if (movies.isPresent()) {
-            return new ResponseEntity<>(movies.get(), HttpStatus.OK);
+    public ResponseEntity<Cart> getCartById(@PathVariable("id") String id) {
+        Optional<Cart> cart = cartRepository.findById(id);
+        if (cart.isPresent()) {
+            return new ResponseEntity<>(cart.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
-    /*
-        Method - Update Movies
-        By - Isuru Pathum Herath
-    */
-
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable("id") String id, @RequestBody Movie movie) {
-        Optional<Movie> movieData = movieRepository.findById(id);
-        if (movieData.isPresent()) {
-            Movie movieList = movieData.get();
-            movieList.setName(movie.getName());
-            movieList.setDescription(movie.getDescription());
-            movieList.setGenre(movie.getGenre());
-            movieList.setRating(movie.getRating());
-            movieList.setReleaseDate(movie.getReleaseDate());
-            movieList.setLanguage(movie.getLanguage());
-            movieList.setTags(movie.getTags());
-            movieList.setDirector(movie.getDirector());
-            movieList.setCast(movie.getCast());
-            movieList.setAvailable(movie.getAvailable());
-            movieList.setMovieURL(movie.getMovieURL());
-            return new ResponseEntity<>(movieRepository.save(movieList), HttpStatus.OK);
+    public ResponseEntity<Cart> updateCart(@PathVariable("id") String id, @RequestBody Cart cart) {
+        Optional<Cart> cartData = cartRepository.findById(id);
+        if (cartData.isPresent()) {
+            Cart cartList = cartData.get();
+            cartList.setUserId(cart.getUserId());
+            cartList.setMovieId(cart.getMovieId());
+            cartList.setMovieName(cart.getMovieName());
+            cartList.setMoviePrice(cart.getMoviePrice());
+            return new ResponseEntity<>(cartRepository.save(cartList), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /*
-      Method - Delete Movies by Id
-      By - Isuru Pathum Herath
-    */
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteCart(@PathVariable("id") String id) {
         try {
-            movieRepository.deleteById(id);
+            cartRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    /*
-      Method - Delete All Movies
-      By - Isuru Pathum Herath
-    */
 
-    @DeleteMapping("/")
-    public ResponseEntity<HttpStatus> deleteAllMovies() {
-        try {
-            movieRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @DeleteMapping("/")
+//    public ResponseEntity<HttpStatus> deleteAllMovies() {
+//        try {
+//            movieRepository.deleteAll();
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     /*
       Method - Get by Availability
       By - Isuru Pathum Herath
     */
 
-    @GetMapping("/available")
-    public ResponseEntity<List<Movie>> findByAvailability() {
-        try {
-            List<Movie> movies = movieRepository.findByAvailable(true);
-            if (movies.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(movies, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/available")
+//    public ResponseEntity<List<Movie>> findByAvailability() {
+//        try {
+//            List<Movie> movies = movieRepository.findByAvailable(true);
+//            if (movies.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//            return new ResponseEntity<>(movies, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
