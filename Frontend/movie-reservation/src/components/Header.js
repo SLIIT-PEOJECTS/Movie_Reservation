@@ -1,19 +1,36 @@
 import React from "react";
 import "../asset/css/Navigation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from '../asset/img/icon.png';
+import logo from "../asset/img/icon.png";
 import { useNavigate } from "react-router-dom";
-import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  Container,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
+import {
+  customerLogout,
+  getCustomerUser,
+  logout,
+} from "../Services/SessionManager";
 
 function Header(prop) {
   let navigate = useNavigate();
   const routeChange = (props) => {
     console.log(props);
     navigate(props);
-  }
+  };
+
+  const logoutfunction = (props) => {
+    customerLogout();
+    window.location.href = `/home`;
+  };
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: '10px' }}>
+    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: "10px" }}>
       <Container fluid>
         <Navbar.Brand>
           <img
@@ -24,21 +41,23 @@ function Header(prop) {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Navbar.Brand style={{ fontWeight: "bold", fontSize: '2rem', color: "#8eaccb	" }}>{prop.tab}</Navbar.Brand>
+        <Navbar.Brand
+          style={{ fontWeight: "bold", fontSize: "2rem", color: "#8eaccb	" }}
+        >
+          {prop.tab}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
+            style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link onClick={() => routeChange('/home')} >Home</Nav.Link>
+            <Nav.Link onClick={() => routeChange("/home")}>Home</Nav.Link>
             <Nav.Link href="#movie-list">Trending Movies</Nav.Link>
-            <Nav.Link >Halls</Nav.Link>
+            <Nav.Link>Halls</Nav.Link>
             {/* disabled */}
-            <Nav.Link onClick={() => routeChange('/cart')}>
-              My Cart
-            </Nav.Link>
+            <Nav.Link onClick={() => routeChange("/cart")}>My Cart</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <FormControl
@@ -49,7 +68,30 @@ function Header(prop) {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
-          <Button variant="danger" style={{ marginLeft: '2rem' }} onClick={() => routeChange('/login')}>Login/Signup</Button>
+          {/* <Button
+            variant="danger"
+            style={{ marginLeft: "2rem" }}
+            onClick={() => routeChange("/login")}
+          >
+            Login/Signup
+          </Button> */}
+          {getCustomerUser() ? (
+            <Button
+              variant="danger"
+              style={{ marginLeft: "2rem" }}
+              onClick={() => logoutfunction()}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              variant="danger"
+              style={{ marginLeft: "2rem" }}
+              onClick={() => routeChange("/login")}
+            >
+              Login/Signup
+            </Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
