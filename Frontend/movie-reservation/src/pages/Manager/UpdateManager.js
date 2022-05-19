@@ -17,13 +17,14 @@ import { getToken } from '../../Services/SessionManager';
 const storage = firebase.storage();
 
 const UpdateStaffMember = props => {
-    // state
 
+    // state
     const { id } = useParams();
     const [token, setToken] = useState('');
     const [file, setFile] = useState(null);
     const [profileURL, setURL] = useState("");
 
+    // Set states to empty
     const [state, setState] = useState({
         firstName: '',
         middleName: '',
@@ -41,14 +42,18 @@ const UpdateStaffMember = props => {
     //destructure values from state
     const { firstName, middleName, lastName, mobileNumber, email, DOB, nic, address, type, accountStatus } = state;
 
+    // Handle Change for Image
     function handleChangeImage(e) {
         setFile(e.target.files[0]);
     }
 
+    // Use Effect to execute code in load
     useEffect(() => {
         const tk = getToken();
         setToken(tk);
         console.log(token);
+
+        // Get Manager Details by Id 
         axios
             .get(`http://localhost:8081/manager/${id}`, {
                 headers: {
@@ -62,9 +67,10 @@ const UpdateStaffMember = props => {
                 setURL(profileURL);
                 console.log(profileURL)
             })
-            .catch(error => alert('Error Loading Update Staff'));
+            .catch(error => alert('Error Loading Update Manager'));
     }, []);
 
+    // The update form
     const showUpdateForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -161,6 +167,7 @@ const UpdateStaffMember = props => {
         </form>
     )
 
+    // Handle Change for Input Fields
     function handleChange(name) {
         return function (event) {
             setState({ ...state, [name]: event.target.value });
@@ -182,6 +189,7 @@ const UpdateStaffMember = props => {
         });
     }
 
+    // Handle Submit
     const handleSubmit = event => {
         event.preventDefault()
         console.table({ firstName, middleName, lastName, mobileNumber, email, DOB, address, nic, type, accountStatus, profileURL })

@@ -1,7 +1,7 @@
 /*
     Created by - Isuru Pathum Herath
     Name - Add Movie
- */
+*/
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";

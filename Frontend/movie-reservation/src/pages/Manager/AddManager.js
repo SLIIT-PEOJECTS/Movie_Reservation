@@ -16,18 +16,19 @@ import { getToken } from '../../Services/SessionManager';
 const storage = firebase.storage();
 
 const AddManager = () => {
+    
     // state
     const [file, setFile] = useState(null);
     const [profileURL, setURL] = useState("");
     const [token, setToken] = useState('');
 
+    //Auto Execute Use Effect
     useEffect(() => {
-        const tk = getToken();
-        setToken(tk);
-        console.log(token);
-
+        const tk = getToken();  //Get Token
+        setToken(tk);           //Set Token 
     }, []);
 
+    //Set state to empty
     const [state, setState] = useState({
         firstName: "",
         middleName: "",
@@ -55,18 +56,19 @@ const AddManager = () => {
         accountStatus,
     } = state;
 
-    //Change Hander
+    // Change Hander
     function handleChange(name) {
         return function (event) {
             setState({ ...state, [name]: event.target.value });
         };
     }
 
+    // Handle change the image 
     function handleChangeImage(e) {
         setFile(e.target.files[0]);
     }
 
-    //Save Image
+    //Save Image in firebase
     function handleUpload(e) {
         e.preventDefault();
         const ref = storage.ref(`/images/${file.name}`);
@@ -81,7 +83,7 @@ const AddManager = () => {
         });
     }
 
-    //Submit Handler
+    // Submit Handler
     const handleSubmit = (event) => {
         event.preventDefault();
         console.table({
@@ -118,14 +120,15 @@ const AddManager = () => {
             })
             .then((response) => {
                 console.log(response);
-                //show success alert
-                // alert(`Employee ${response.data.firstName} is Created`);
+                
+                // show success alert
                 Swal.fire(
                     `Manager ${response.data.firstName} is Added`,
                     'Click Ok to continue',
                     'success'
                 )
-                //empty state
+
+                // empty state
                 setState({
                     ...state,
                     firstName: "",
@@ -151,7 +154,6 @@ const AddManager = () => {
                     Swal.fire({
                         icon: 'error',
                         title: `Duplicate Email Address`,
-                        // text: `${error.response.data.error}`,
                         footer: 'Please try again'
                     })
                 }
@@ -159,10 +161,8 @@ const AddManager = () => {
                     Swal.fire({
                         icon: 'error',
                         title: `${error.code}`,
-                        // text: `${error.response.data.error}`,
                         footer: 'Please try again'
                     })
-                    // alert(error.response.data.error);
                 }
 
             });
@@ -231,9 +231,9 @@ const AddManager = () => {
                                             <label className="text-muted">Account Type</label>
                                             <select id="type" value={type} onChange={handleChange("type")} className="form-control">
                                                 <option value="" disabled selected>Select a Account Type</option>
-                                                <option value="Admin">Admin Account</option>
-                                                <option value="Manager">Manager Accoount</option>
-                                                <option value="User">User Account</option>
+                                                <option value="admin">Admin Account</option>
+                                                <option value="manager">Manager Accoount</option>
+                                                <option value="user">User Account</option>
                                             </select>
                                         </div>
                                     </div>
