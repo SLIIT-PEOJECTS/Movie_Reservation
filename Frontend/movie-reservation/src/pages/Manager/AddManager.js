@@ -3,7 +3,7 @@
     Name - Add Manager
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import firebase from '../Movies/firebase';
@@ -11,6 +11,7 @@ import 'firebase/storage'
 import './Manager.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const storage = firebase.storage();
 
@@ -18,6 +19,14 @@ const AddManager = () => {
     // state
     const [file, setFile] = useState(null);
     const [profileURL, setURL] = useState("");
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
+
+    }, []);
 
     const [state, setState] = useState({
         firstName: "",
@@ -102,6 +111,10 @@ const AddManager = () => {
                 type,
                 accountStatus,
                 profileURL,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
             .then((response) => {
                 console.log(response);
