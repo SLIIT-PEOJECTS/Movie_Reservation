@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import swal from 'sweetalert';
+import { logout } from '../../Services/SessionManager';
 import {
     CDBSidebar,
     CDBSidebarContent,
@@ -15,6 +17,28 @@ import {
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
+
+    const logoutFromSession = () => {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to logout!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Loging out", {
+                        icon: "success",
+                    });
+                    logout();
+                    window.location.href = `/admin-login`;
+                } else {
+                    swal("Stay in Session!");
+                }
+            });
+    }
+
     return (
         <div style={{ position: 'absolute', display: 'flex', height: '100vh' }}>
             <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -39,8 +63,8 @@ const Sidebar = () => {
                             <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
                         </NavLink>
 
-                        <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-                            <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
+                        <NavLink onClick={() => logoutFromSession()} exact to="#" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="exclamation-circle">Logout</CDBSidebarMenuItem>
                         </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>

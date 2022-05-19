@@ -1,3 +1,8 @@
+/*
+    Created by - Isuru Pathum Herath
+    Name - Update manager
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from "sweetalert2";
@@ -7,6 +12,7 @@ import { useParams } from "react-router-dom";
 import './Manager.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const storage = firebase.storage();
 
@@ -14,7 +20,7 @@ const UpdateStaffMember = props => {
     // state
 
     const { id } = useParams();
-
+    const [token, setToken] = useState('');
     const [file, setFile] = useState(null);
     const [profileURL, setURL] = useState("");
 
@@ -40,8 +46,15 @@ const UpdateStaffMember = props => {
     }
 
     useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
         axios
-            .get(`http://localhost:8081/manager/${id}`)
+            .get(`http://localhost:8081/manager/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
             .then(response => {
                 console.log(response)
                 const { firstName, middleName, lastName, mobileNumber, email, DOB, nic, address, type, accountStatus, profileURL } = response.data
@@ -173,7 +186,11 @@ const UpdateStaffMember = props => {
         event.preventDefault()
         console.table({ firstName, middleName, lastName, mobileNumber, email, DOB, address, nic, type, accountStatus, profileURL })
         axios
-            .put(`http://localhost:8081/manager/${id}`, { firstName, middleName, lastName, mobileNumber, email, DOB, address, nic, type, accountStatus, profileURL })
+            .put(`http://localhost:8081/manager/${id}`, { firstName, middleName, lastName, mobileNumber, email, DOB, address, nic, type, accountStatus, profileURL }, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
             .then(response => {
 
                 console.log(response)

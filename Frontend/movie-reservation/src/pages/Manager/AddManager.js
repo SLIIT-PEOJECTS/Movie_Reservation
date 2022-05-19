@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+/*
+    Created by - Isuru Pathum Herath
+    Name - Add Manager
+ */
+
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import firebase from '../Movies/firebase';
@@ -6,6 +11,7 @@ import 'firebase/storage'
 import './Manager.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const storage = firebase.storage();
 
@@ -13,6 +19,14 @@ const AddManager = () => {
     // state
     const [file, setFile] = useState(null);
     const [profileURL, setURL] = useState("");
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
+
+    }, []);
 
     const [state, setState] = useState({
         firstName: "",
@@ -97,6 +111,10 @@ const AddManager = () => {
                 type,
                 accountStatus,
                 profileURL,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             })
             .then((response) => {
                 console.log(response);
@@ -128,14 +146,25 @@ const AddManager = () => {
 
             })
             .catch((error) => {
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.error}`,
-                    // text: `${error.response.data.error}`,
-                    footer: 'Please try again'
-                })
-                // alert(error.response.data.error);
+                console.log(error.response.status);
+                if (error.response.status === 406) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `Duplicate Email Address`,
+                        // text: `${error.response.data.error}`,
+                        footer: 'Please try again'
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${error.code}`,
+                        // text: `${error.response.data.error}`,
+                        footer: 'Please try again'
+                    })
+                    // alert(error.response.data.error);
+                }
+
             });
     };
 

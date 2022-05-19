@@ -109,20 +109,6 @@ public class TutorialController {
         }
     }
 
-//    APIs for cart operations
-    @PostMapping("/cart/add")
-    public void addToCart(@RequestBody Cart cart){
-//        get user id
-//            String userID = userDetails.getID();
-        cartRepository.save(new Cart(cart.getId(),cart.getUserID(),cart.getUserName(),cart.getMovieName(),cart.getShowTime(),cart.getShowDate(),cart.getBookedDate(),cart.getTheaterName(),cart.getTicketAmount()));
-    }
-
-//    @GetMapping("cart/get")
-//    public ResponseEntity<List> getCartList(){
-//
-//        return cartRepository.findBy(userID)
-//    }
-
     @DeleteMapping("/cart/delete")
     public void deleteMovie(@RequestBody ObjectId movieId){
         cartRepository.deleteById(movieId);

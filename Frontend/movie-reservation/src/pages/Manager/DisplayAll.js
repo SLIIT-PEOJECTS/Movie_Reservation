@@ -1,3 +1,8 @@
+/*
+    Created by - Isuru Pathum Herath
+    Name - Display Manager
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from "sweetalert";
@@ -5,16 +10,31 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import './Manager.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const DisplayAll = () => {
 
     const [manager, setManager] = useState([])
     const [wordEntered, setWordEntered] = useState("");
     const [count, setCount] = useState([]);
+    const [token, setToken] = useState([]);
+
+    useEffect(() => {
+        setToken(getToken());
+        console.log(getToken());
+    }, [])
+
+    useEffect(() => {
+        fetchManager();
+    }, [])
 
     //Fetch All Managers
     const fetchManager = () => {
-        axios.get("http://localhost:8081/manager/")
+        axios.get("http://localhost:8081/manager/", {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 setManager(response.data)
@@ -35,7 +55,11 @@ const DisplayAll = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     axios
-                        .delete(`http://localhost:8081/manager/${id}`)
+                        .delete(`http://localhost:8081/manager/${id}`, {
+                            headers: {
+                                'Authorization': `Bearer ${getToken()}`
+                            }
+                        })
                         .then(response => {
                             // alert(response.data.message);
                             Swal("The Manager is Deleted!", {
@@ -56,7 +80,11 @@ const DisplayAll = () => {
         const searchWord = event.target.value;
         console.log(searchWord);
         setWordEntered(searchWord);
-        axios.get("http://localhost:8081/manager/")
+        axios.get("http://localhost:8081/manager/", {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 const newFilter = manager.filter((response) => {
@@ -78,10 +106,6 @@ const DisplayAll = () => {
             })
             .catch(error => console.log(error));
     };
-
-    useEffect(() => {
-        fetchManager();
-    }, [])
 
     return (
         <div>
@@ -174,7 +198,7 @@ const DisplayAll = () => {
                                         <tr key={i}>
                                             <th scope="row">{i + 1}</th>
 
-                                            <a href={`/singleProfile/${manager.id}`} style={{ textDecoration: 'none' }}>
+                                            <a href={`/update-profile/${manager.id}`} style={{ textDecoration: 'none' }}>
                                                 <td>{manager.id}</td>
                                             </a>
 
