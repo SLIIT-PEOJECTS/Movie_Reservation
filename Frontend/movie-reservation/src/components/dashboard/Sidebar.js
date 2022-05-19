@@ -3,7 +3,8 @@
     Name - Sidebar
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import swal from 'sweetalert';
 import { logout } from '../../Services/SessionManager';
 import {
@@ -19,7 +20,23 @@ import { getUser, getToken } from '../../Services/SessionManager';
 
 const Sidebar = () => {
 
-    
+    const [manager, setManager] = useState([]);
+    const [state, setState] = useState({
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        mobileNumber: '',
+        email: '',
+        DOB: '',
+        nic: '',
+        address: '',
+        type: '',
+        id: '',
+        accountStatus: ""
+    });
+
+    //destructure values from state
+    const { firstName, middleName, lastName, mobileNumber, email, DOB, nic, address, type, accountStatus } = state;
 
     const logoutFromSession = () => {
         swal({
@@ -42,6 +59,38 @@ const Sidebar = () => {
             });
     }
 
+    const errorMessage = () => {
+        swal("You don't have permission!", {
+            buttons: false,
+            timer: 3000,
+        });
+    }
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8081/manager/${getUser()}`, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
+            .then(response => {
+                console.log(response)
+                const { firstName, middleName, lastName, mobileNumber, email, DOB, nic, address, type, accountStatus, profileURL } = response.data
+                setState({ ...state, firstName, middleName, lastName, mobileNumber, email, DOB, nic, address, type, accountStatus });
+                console.log(type)
+            })
+            .catch(error => alert('Error Loading Update Manager'));
+    }, []);
+
+    const isAdmin = () => {
+        console.log("Type: " + type);
+        if (type == "admin") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
         <div style={{ position: 'absolute', display: 'flex', height: '100vh' }}>
             <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -59,9 +108,19 @@ const Sidebar = () => {
                         <NavLink exact to="/theater" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="table">Theater</CDBSidebarMenuItem>
                         </NavLink>
-                        <NavLink exact to="/manager" activeClassName="activeClicked">
-                            <CDBSidebarMenuItem icon="user">Manager</CDBSidebarMenuItem>
-                        </NavLink>
+
+                        <div>
+                            {type == "admin" ? (
+                                <NavLink exact to="/manager" activeClassName="activeClicked">
+                                    <CDBSidebarMenuItem icon="user">Manager</CDBSidebarMenuItem>
+                                </NavLink>
+                            ) : (
+                                <NavLink onClick={() => errorMessage()} exact to="#" activeClassName="activeClicked">
+                                    <CDBSidebarMenuItem icon="user">Manager</CDBSidebarMenuItem>
+                                </NavLink>
+                            )}
+                        </div>
+
                         <NavLink exact to="/analytics" activeClassName="activeClicked">
                             <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
                         </NavLink>
@@ -78,7 +137,6 @@ const Sidebar = () => {
                             padding: '20px 5px',
                         }}
                     >
-                        @isuru
                     </div>
                 </CDBSidebarFooter>
             </CDBSidebar>
