@@ -1,12 +1,11 @@
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Cart from './components/Cart';
-import Popup from './components/Popup';
-import Register from './components/Registration';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Cart from "./components/Cart";
+import Register from "./components/Registration";
 
-// Admin Side
+// Immport Router Files
 import Dashboard from './components/dashboard/DashboardLoder';
 import DisplayAllMovie from './pages/Movies/DisplayAll';
 import AddMovie from './pages/Movies/AddMovie';
@@ -25,14 +24,15 @@ import DisplayAllSession from './pages/SessionManager/DisplayAll';
 import ManagerProfile from './pages/Manager/ManagerProfile';
 import MovieProfile from './pages/Movies/MovieProfile';
 
-
+import Popup from "./components/Popup";
+import AddSession from "./pages/SessionManager/AddSession";
+import DisplayAllSession from "./pages/SessionManager/DisplayAll";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-
           {/* Private Route for Manager User */}
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/movie" element={<DisplayAllMovie />} />
