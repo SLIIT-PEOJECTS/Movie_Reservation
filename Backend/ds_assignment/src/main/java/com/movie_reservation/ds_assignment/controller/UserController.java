@@ -59,4 +59,17 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user)   {
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("Passowrd: " + user.getPassword());
+
+        Optional<User> managerUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (managerUser.isPresent()) {
+            return new ResponseEntity<>(managerUser.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
 }
