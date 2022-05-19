@@ -4,7 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 import "../asset/css/Home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Carousel, Container, Row, Col, Card, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import { Carousel, Card, ListGroup, ListGroupItem, Button, Modal, Form} from 'react-bootstrap';
 import { CameraReelsFill} from 'react-bootstrap-icons';
 import { useNavigate } from "react-router-dom";
 import ReactStars from 'react-stars';
@@ -82,15 +82,15 @@ function Home(props) {
               >
                 <Card.Img variant="top" src={data.movieURL} />
                 <Card.Body style={{ color: "#0c141c" }}>
-                  <Card.Title>
+                  <Card.Title style={{}}>
                     <b>{data.name}</b>
                   </Card.Title>
                   <Card.Text>
-                    Genre : {data.genre} <br /> Rating <br /> 
+                    Genre : {data.genre} <br /> 
                     <div className='now-screen'>
                         <div className='animation'><CameraReelsFill  color="#d9534f"/></div>
                         <p>Now Screening</p>
-                    </div>
+                    </div> Rating <br /> 
                     <ReactStars
                   count={5}
                   onChange={null}

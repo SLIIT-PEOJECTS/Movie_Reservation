@@ -98,7 +98,9 @@ function DetailView() {
                 
                 <br />
                 <div>
-                  <Button disabled={!movie.available} variant="secondary" size="lg">Add To Cart</Button>
+                  <Button disabled={!movie.available} variant="secondary" size="lg" 
+                  onClick={() => {navigate(`/cart`);}}>
+                    Add To Cart</Button>
                 </div>
 
                 <div>

@@ -22,6 +22,8 @@ import PrivateRoute from "./Services/PrivateRouteManager";
 import ManagerProfile from "./pages/Manager/ManagerProfile";
 import MovieProfile from "./pages/Movies/MovieProfile";
 import Popup from "./components/Popup";
+import AddSession from "./pages/SessionManager/AddSession";
+import DisplayAllSession from "./pages/SessionManager/DisplayAll";
 
 function App() {
   return (
@@ -45,7 +47,7 @@ function App() {
           </Route>
 
           {/* Public Route */}
-
+          <Route path="/movie" element={<DisplayAllMovie />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/home" element={<Home />} />
@@ -54,7 +56,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/view/:movieid" element={<DetailView />} />
           <Route path="/popup" element={<Popup />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/new-session" element={<AddSession />} />
+          <Route path="/session" element={<DisplayAllSession />} />
         </Routes>
       </Router>
     </>
