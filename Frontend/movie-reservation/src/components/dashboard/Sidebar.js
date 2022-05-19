@@ -15,8 +15,11 @@ import {
     CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import { getUser, getToken } from '../../Services/SessionManager';
 
 const Sidebar = () => {
+
+    
 
     const logoutFromSession = () => {
         swal({

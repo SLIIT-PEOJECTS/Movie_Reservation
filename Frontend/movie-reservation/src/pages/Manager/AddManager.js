@@ -231,9 +231,9 @@ const AddManager = () => {
                                             <label className="text-muted">Account Type</label>
                                             <select id="type" value={type} onChange={handleChange("type")} className="form-control">
                                                 <option value="" disabled selected>Select a Account Type</option>
-                                                <option value="Admin">Admin Account</option>
-                                                <option value="Manager">Manager Accoount</option>
-                                                <option value="User">User Account</option>
+                                                <option value="admin">Admin Account</option>
+                                                <option value="manager">Manager Accoount</option>
+                                                <option value="user">User Account</option>
                                             </select>
                                         </div>
                                     </div>
