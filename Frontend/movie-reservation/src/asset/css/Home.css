@@ -12,7 +12,6 @@
 
 .wrapper .carousel img{
     height:40rem;
-    margin-bottom:5rem;
 }
 
 .wrapper .middle-view{
@@ -30,5 +29,28 @@
   flex-wrap: wrap;
   flex-direction: row;
   margin-right: auto;
+  margin-top: 5rem;
+}
+
+.now-screen{
+  display: flex;
+}
+
+.now-screen .animation{
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+  }
+
+.now-screen p{
+  margin-left: 10px;
+  padding: 2px;
+  font-weight: bold;
+  color: #d9534f;
+  opacity: 60%;
 }
 

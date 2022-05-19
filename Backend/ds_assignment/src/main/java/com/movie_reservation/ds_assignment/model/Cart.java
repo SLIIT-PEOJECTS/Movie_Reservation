@@ -11,16 +11,57 @@ import java.util.Date;
 @Data
 public class Cart {
     @Id
-    private ObjectId id;
-    private String userID;
-    private String userName;
+    private String id;
+    private String userId;
+    private String movieId;
     private String movieName;
-    private Date showDate;
-    private Date bookedDate;
-    private String showTime;
-    private String theaterName;
-    private int ticketAmount;
+    private float moviePrice;
 
-    public Cart(ObjectId id, String userID, String userName, String movieName, String showTime, Date showDate, Date bookedDate, String theaterName, int ticketAmount) {
+    public Cart(String id, String userId, String movieId, String movieName, float moviePrice) {
+        this.id = id;
+        this.userId = userId;
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.moviePrice = moviePrice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public float getMoviePrice() {
+        return moviePrice;
+    }
+
+    public void setMoviePrice(float moviePrice) {
+        this.moviePrice = moviePrice;
     }
 }

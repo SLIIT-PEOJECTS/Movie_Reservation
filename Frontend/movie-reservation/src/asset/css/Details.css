@@ -1,4 +1,28 @@
-.img-box img{
+/* .img-box img{
     width: 50%;
     height: 50%;
+    align-items: center;
+} */
+
+.movie-img{
+    margin-top: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    width: 30rem;
+}
+
+.movie-title{
+    font-weight: bold;
+}
+
+.movie{
+    border: 2px;
+    border-radius: 10px;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+movie-img-span{
+    display: flex;
 }

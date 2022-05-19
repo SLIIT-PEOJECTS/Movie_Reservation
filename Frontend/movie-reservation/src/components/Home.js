@@ -5,16 +5,12 @@ import Header from './Header';
 import "../asset/css/Home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel, Container, Row, Col, Card, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import { CameraReelsFill} from 'react-bootstrap-icons';
 import { useNavigate } from "react-router-dom";
-import DetailView from './DetailView';
+import ReactStars from 'react-stars';
 
 function Home(props) {
     const navigate = useNavigate();
-    // temp routing
-    // let navigate = useNavigate(); 
-    // const routeChange = (props) =>{
-    //   navigate(props);
-    // }
 
     const [data, setData] = React.useState([]);
 
@@ -82,6 +78,7 @@ function Home(props) {
               <Card
                 style={{ width: "20rem" }}
                 className="shadow-lg bg-white rounded box"
+                key={data.id}
               >
                 <Card.Img variant="top" src={data.movieURL} />
                 <Card.Body style={{ color: "#0c141c" }}>
@@ -89,8 +86,19 @@ function Home(props) {
                     <b>{data.name}</b>
                   </Card.Title>
                   <Card.Text>
-                    {data.description} <br /> Genre : {data.genre} <br /> Rating
-                    : {data.rating}
+                    Genre : {data.genre} <br /> Rating <br /> 
+                    <div className='now-screen'>
+                        <div className='animation'><CameraReelsFill  color="#d9534f"/></div>
+                        <p>Now Screening</p>
+                    </div>
+                    <ReactStars
+                  count={5}
+                  onChange={null}
+                  edit={false}
+                  size={24}
+                  color2={"#ffd700"}
+                  value={data.rating}
+                />
                   </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
@@ -102,7 +110,7 @@ function Home(props) {
                     variant="secondary"
                     size="sm"
                     style={{ width: "16rem", marginLeft: "1rem" }}
-                    onClick={() => {navigate('/view');}}
+                    onClick={() => {navigate(`/view/${data.id}`);}}
                   >
                     View Movie{" "}
                   </Button>

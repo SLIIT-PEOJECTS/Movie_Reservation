@@ -3,14 +3,15 @@
     Name - Add Movie
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
 import firebase from './firebase';
-import 'firebase/storage'
+import 'firebase/storage';
+import { getToken } from '../../Services/SessionManager';
 
 const storage = firebase.storage();
 
@@ -20,6 +21,7 @@ const AddMovie = () => {
     const [movieURL, setURL] = useState("");
     const [cast, setSelectedCast] = useState("");
     const [tags, setSelectedTag] = useState("");
+    const [token, setToken] = useState('');
 
     const [state, setState] = useState({
         name: "",
@@ -197,6 +199,13 @@ const AddMovie = () => {
         setFile(e.target.files[0]);
     }
 
+    useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
+
+    }, []);
+
     // Save Image
     function handleUpload(e) {
         e.preventDefault();
@@ -250,6 +259,10 @@ const AddMovie = () => {
                 cast,
                 available,
                 movieURL,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             })
             .then((response) => {
                 console.log(response);

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Cart from './components/Cart';
+import Popup from './components/Popup';
+import Register from './components/Registration';
 
 // Admin Side
 import Dashboard from './components/dashboard/DashboardLoder';
@@ -19,9 +21,13 @@ import DetailView from './components/DetailView';
 import AdminLogin from './pages/Manager/Login';
 import PrivateRoute from './Services/PrivateRouteManager';
 import { getUser } from './Services/SessionManager';
-import Popup from './components/Popup';
+// import Popup from './components/Popup';
 import AddSession from './pages/SessionManager/AddSession';
 import DisplayAllSession from './pages/SessionManager/DisplayAll';
+import ManagerProfile from './pages/Manager/ManagerProfile';
+import MovieProfile from './pages/Movies/MovieProfile';
+
+
 
 function App() {
   return (
@@ -41,18 +47,22 @@ function App() {
             <Route path="/new-manager" element={<AddManager />} />
             <Route path="/manager" element={<DisplayManager />} />
             <Route path="/update-manager/:id" element={<UpdateManager />} />
+            <Route path="/update-profile/:id" element={<ManagerProfile />} />
+            <Route path="/movie-profile/:id" element={<MovieProfile />} />
           </Route>
 
           {/* Public Route */}
           <Route path="/new-theater" element={<AddTheater />} />
           <Route path="/new-movie" element={<AddMovie />} />
           <Route path="/movie" element={<DisplayAllMovie />} />
+          
+          <Route path="/register" element={<Register />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/view" element={<DetailView />} />
+          <Route path="/view/:movieid" element={<DetailView />} />
           <Route path="/popup" element={<Popup />} />
           <Route path="/new-session" element={<AddSession />} />
           <Route path="/session" element={<DisplayAllSession />} />

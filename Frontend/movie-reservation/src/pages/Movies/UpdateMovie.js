@@ -13,7 +13,8 @@ import './Movie.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
 import firebase from './firebase';
-import 'firebase/storage'
+import 'firebase/storage';
+import { getToken } from '../../Services/SessionManager';
 
 const storage = firebase.storage();
 
@@ -26,6 +27,7 @@ const UpdateMovie = props => {
     const [movieURL, setURL] = useState("");
     const [cast, setSelectedCast] = useState("");
     const [tags, setSelectedTag] = useState("");
+    const [token, setToken] = useState('');
 
     const [state, setState] = useState({
         name: "",
@@ -199,8 +201,16 @@ const UpdateMovie = props => {
     }
 
     useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
+
         axios
-            .get(`http://localhost:8081/movie/${id}`)
+            .get(`http://localhost:8081/movie/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
             .then(response => {
                 console.log(response)
                 const { name,
@@ -421,6 +431,10 @@ const UpdateMovie = props => {
                 cast,
                 available,
                 movieURL,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             })
             .then(response => {
 
