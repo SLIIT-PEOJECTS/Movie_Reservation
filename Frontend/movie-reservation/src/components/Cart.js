@@ -6,13 +6,17 @@ import "../asset/css/Cart.css";
 import { Cart } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TrashFill } from "react-bootstrap-icons";
-import Popup from "./Popup";
 import { Button, Modal, Form,} from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
+import QRCode from "qrcode.react";
 
 function Carts() {
-    const showPopup= () => {
-        <Popup show='true'/>
-    }
+  const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   
   return (
     <div className="App">
@@ -92,7 +96,7 @@ function Carts() {
                       </td>
                       <td>
                         <div>
-                          <Button variant="primary" onClick={showPopup()}>
+                          <Button variant="dark" onClick={handleShow}>
                             Session
                           </Button>
                         </div>
@@ -106,7 +110,7 @@ function Carts() {
                     {" "}
                     Make Purchase <i class="fa fa-chevron-right"></i>{" "}
                   </a>
-                  <a href="#" class="btn btn-light">
+                  <a href="#" class="btn btn-light" onClick={() => {navigate(`/home`);}}>
                     {" "}
                     <i class="fa fa-chevron-left"></i> Continue shopping{" "}
                   </a>
@@ -114,9 +118,11 @@ function Carts() {
               </div>
 
               <div class="alert alert-success mt-3">
+                <span>
                 <p class="icontext">
                   <i class="icon text-success fa fa-truck"></i> Happy Movie Hour
                 </p>
+                </span>
               </div>
             </main>
             <aside class="col-md-3">
@@ -124,17 +130,15 @@ function Carts() {
                 <div class="card-body">
                   <form>
                     <div class="form-group">
-                      <label>Have coupon?</label>
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name=""
-                          placeholder="Coupon code"
-                        />
-                        <span class="input-group-append">
-                          <button class="btn btn-primary">Apply</button>
-                        </span>
+                      <label>Scan Here For E-Purchase</label>
+                      <div class="qr-view">
+                          <QRCode
+                        id="qr-gen"
+                        value={"hello manul"}
+                        size={200}
+                        level={"H"}
+                        includeMargin={true}
+                      />
                       </div>
                     </div>
                   </form>
@@ -170,6 +174,27 @@ function Carts() {
         </div>
       </section>
       <Footer />
+
+      {/* popup model */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title><h2>Select Your Movie Session</h2></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            BrowserRouter
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 }
