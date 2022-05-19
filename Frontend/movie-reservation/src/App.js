@@ -23,10 +23,7 @@ import AddSession from './pages/SessionManager/AddSession';
 import DisplayAllSession from './pages/SessionManager/DisplayAll';
 import ManagerProfile from './pages/Manager/ManagerProfile';
 import MovieProfile from './pages/Movies/MovieProfile';
-
 import Popup from "./components/Popup";
-import AddSession from "./pages/SessionManager/AddSession";
-import DisplayAllSession from "./pages/SessionManager/DisplayAll";
 
 function App() {
   return (
