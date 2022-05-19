@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Cart from './components/Cart';
+import Popup from './components/Popup';
 
 // Admin Side
 import Dashboard from './components/dashboard/DashboardLoder';
@@ -18,8 +19,10 @@ import UpdateManager from './pages/Manager/UpdateManager';
 import DetailView from './components/DetailView';
 import AdminLogin from './pages/Manager/Login';
 import PrivateRoute from './Services/PrivateRouteManager';
-import { getUser } from './Services/SessionManager';
-import Popup from './components/Popup';
+import ManagerProfile from './pages/Manager/ManagerProfile';
+import MovieProfile from './pages/Movies/MovieProfile';
+
+
 
 function App() {
   return (
@@ -39,6 +42,8 @@ function App() {
             <Route path="/new-manager" element={<AddManager />} />
             <Route path="/manager" element={<DisplayManager />} />
             <Route path="/update-manager/:id" element={<UpdateManager />} />
+            <Route path="/update-profile/:id" element={<ManagerProfile />} />
+            <Route path="/movie-profile/:id" element={<MovieProfile />} />
           </Route>
 
           {/* Public Route */}

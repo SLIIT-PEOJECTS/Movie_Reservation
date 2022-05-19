@@ -206,7 +206,7 @@ const DisplayAll = () => {
                                         <tr key={i}>
                                             <th scope="row">{i + 1}</th>
 
-                                            <a href={`/update-movie/${movies.id}`} style={{ textDecoration: 'none' }}>
+                                            <a href={`/movie-profile/${movies.id}`} style={{ textDecoration: 'none' }}>
                                                 <td>{movies.name}</td>
                                             </a>
 
