@@ -26,9 +26,9 @@ const AddSession = () => {
         toTime,
     } = state;
 
-    function handleChange(sessionName) {
+    function handleChange(name) {
         return function (event) {
-            setState({ ...state, [sessionName]: event.target.value });
+            setState({ ...state, [name]: event.target.value });
         };
     }
 
@@ -214,7 +214,7 @@ const AddSession = () => {
                                 <br />
                                 <br />
                                 <div>
-                                    <button className="btn btn-primary btn-lg btn-block">Add Theater</button>
+                                    <button className="btn btn-primary btn-lg btn-block">Add Session</button>
                                 </div>
                                 <br />
                             </form>
