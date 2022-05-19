@@ -59,7 +59,7 @@ const AddTheater = () => {
                 noOfSeat,
             }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then((response) => {

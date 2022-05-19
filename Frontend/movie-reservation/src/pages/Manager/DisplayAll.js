@@ -17,13 +17,22 @@ const DisplayAll = () => {
     const [manager, setManager] = useState([])
     const [wordEntered, setWordEntered] = useState("");
     const [count, setCount] = useState([]);
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState([]);
+
+    useEffect(() => {
+        setToken(getToken());
+        console.log(getToken());
+    }, [])
+
+    useEffect(() => {
+        fetchManager();
+    }, [])
 
     //Fetch All Managers
     const fetchManager = () => {
         axios.get("http://localhost:8081/manager/", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         })
             .then(response => {
@@ -48,7 +57,7 @@ const DisplayAll = () => {
                     axios
                         .delete(`http://localhost:8081/manager/${id}`, {
                             headers: {
-                                'Authorization': `Bearer ${token}`
+                                'Authorization': `Bearer ${getToken()}`
                             }
                         })
                         .then(response => {
@@ -73,7 +82,7 @@ const DisplayAll = () => {
         setWordEntered(searchWord);
         axios.get("http://localhost:8081/manager/", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         })
             .then(response => {
@@ -97,13 +106,6 @@ const DisplayAll = () => {
             })
             .catch(error => console.log(error));
     };
-
-    useEffect(() => {
-        const tk = getToken();
-        setToken(tk);
-        console.log(token);
-        fetchManager();
-    }, [])
 
     return (
         <div>

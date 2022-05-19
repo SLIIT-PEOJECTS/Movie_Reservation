@@ -113,7 +113,7 @@ const AddManager = () => {
                 profileURL,
             }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then((response) => {
