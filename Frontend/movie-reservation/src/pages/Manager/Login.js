@@ -28,9 +28,9 @@ function LoginScreen(props) {
         // const user = { email, password }
         console.log(email, password);
         axios.post('http://localhost:8081/manager/login', { email, password })
-            .then(response => {
-                console.log(response)
-                if (response.data == null) {
+            .then(mresponse => {
+                console.log(mresponse)
+                if (mresponse.data == null) {
                     Swal.fire({
                         title: 'Login Failed!',
                         text: 'Email or Password incorrect',
@@ -39,28 +39,27 @@ function LoginScreen(props) {
                     });
                 }
                 else {
-                    if (response.data.accountStatus == "Pending") {
+                    if (mresponse.data.accountStatus == "Pending") {
                         Swal.fire({
                             title: 'Account Suspended!',
-                            text: `User ${response.data.email} Authenticated`,
+                            text: `User is Authenticated`,
                             icon: 'success'
                         });
-                        setManager(response.data)
+                        setManager(mresponse.data)
                         setTimeout(() => { window.location.href = `/admin-login` }, 3000);
                     }
-                    else if (response.data.accountStatus == "Active") {
+                    else if (mresponse.data.accountStatus == "Active") {
                         Swal.fire({
-                            title: 'User ${response.data.email} Authenticated',
+                            title: `User ${mresponse.data.email} Authenticated`,
                             text: `Token Generating!`,
                             icon: 'success'
                         });
-                        setManager(response);
+                        setManager(mresponse);
                         axios.get("http://localhost:8081/manager/token")
                             .then(response => {
                                 console.log(response.data.response);
                                 setToken(response.data.response);
-                                console.log("TOKEN: " + response.data.response);
-                                authenticate(manager, response.data.response, () => window.location.href = `/movie`, 10000);
+                                authenticate(mresponse, response.data.response, () => window.location.href = `/movie`, 10000);
                             })
                             .catch(error => alert("Error Fetching Token"));
 

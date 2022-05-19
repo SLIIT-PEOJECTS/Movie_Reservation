@@ -1,6 +1,7 @@
 package com.movie_reservation.ds_assignment.controller;
 
 import com.movie_reservation.ds_assignment.model.Cart;
+import com.movie_reservation.ds_assignment.model.ManagerUser;
 import com.movie_reservation.ds_assignment.model.Movie;
 import com.movie_reservation.ds_assignment.repository.CartRepository;
 import com.movie_reservation.ds_assignment.repository.MovieRepository;
@@ -49,13 +50,29 @@ public class CartController {
         }
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Cart> getCartById(@PathVariable("id") String id) {
+//        Optional<Cart> cart = cartRepository.findById(id);
+//        if (cart.isPresent()) {
+//            return new ResponseEntity<>(cart.get(), HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Cart> getCartById(@PathVariable("id") String id) {
-        Optional<Cart> cart = cartRepository.findById(id);
-        if (cart.isPresent()) {
-            return new ResponseEntity<>(cart.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Cart>> getCartById(@PathVariable("id") String id) {
+        try {
+            List<Cart> cart = cartRepository.findByUserId(id);
+            if (cart.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            else {
+                return new ResponseEntity<>(cart, HttpStatus.OK);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

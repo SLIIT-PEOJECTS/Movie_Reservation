@@ -3,14 +3,16 @@
     Name - Add Theater
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const AddTheater = () => {
 
+    const [token, setToken] = useState('');
     // state
     const [state, setState] = useState({
         name: "",
@@ -55,6 +57,10 @@ const AddTheater = () => {
                 city,
                 close,
                 noOfSeat,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
             .then((response) => {
                 console.log(response);
@@ -90,6 +96,14 @@ const AddTheater = () => {
                 // alert(error.response.data.error);
             });
     };
+
+    useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
+
+    }, []);
+
 
     return (
         <div>

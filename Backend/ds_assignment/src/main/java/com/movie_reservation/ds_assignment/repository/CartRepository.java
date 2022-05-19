@@ -11,5 +11,6 @@ import java.util.List;
 public interface CartRepository extends MongoRepository<Cart, String> {
 
     List<Cart> findByMovieNameContaining(String movieName);
+    List<Cart> findByUserId(String userId);
     void deleteById(ObjectId movieId);
 }

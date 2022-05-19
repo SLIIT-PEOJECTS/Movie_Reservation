@@ -10,16 +10,22 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import './Manager.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const DisplayAll = () => {
 
     const [manager, setManager] = useState([])
     const [wordEntered, setWordEntered] = useState("");
     const [count, setCount] = useState([]);
+    const [token, setToken] = useState('');
 
     //Fetch All Managers
     const fetchManager = () => {
-        axios.get("http://localhost:8081/manager/")
+        axios.get("http://localhost:8081/manager/", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 setManager(response.data)
@@ -40,7 +46,11 @@ const DisplayAll = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     axios
-                        .delete(`http://localhost:8081/manager/${id}`)
+                        .delete(`http://localhost:8081/manager/${id}`, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
                         .then(response => {
                             // alert(response.data.message);
                             Swal("The Manager is Deleted!", {
@@ -61,7 +71,11 @@ const DisplayAll = () => {
         const searchWord = event.target.value;
         console.log(searchWord);
         setWordEntered(searchWord);
-        axios.get("http://localhost:8081/manager/")
+        axios.get("http://localhost:8081/manager/", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 const newFilter = manager.filter((response) => {
@@ -85,6 +99,9 @@ const DisplayAll = () => {
     };
 
     useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
         fetchManager();
     }, [])
 
