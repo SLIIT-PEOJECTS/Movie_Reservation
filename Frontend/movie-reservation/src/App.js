@@ -47,7 +47,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/view" element={<DetailView />} />
+          <Route path="/view/:movieid" element={<DetailView />} />
           <Route path="/popup" element={<Popup />} />
         </Routes>
       </Router>
