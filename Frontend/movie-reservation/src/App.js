@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Cart from './components/Cart';
 import Popup from './components/Popup';
+import Register from './components/Registration';
 
 // Admin Side
 import Dashboard from './components/dashboard/DashboardLoder';
@@ -47,6 +48,8 @@ function App() {
           </Route>
 
           {/* Public Route */}
+          
+          <Route path="/register" element={<Register />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />

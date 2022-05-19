@@ -5,8 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../asset/css/Registration.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+    const navigate = useNavigate();
   return (
     <div className="image">
       <Header />
@@ -65,7 +67,7 @@ function Register() {
           </button>
         </div>
         <p>
-          Already registered<a href="./">Signin</a>?
+          Already registered<a onClick={() => {navigate(`/login`);}}>Signin</a>?
         </p>
       </div>
       <Footer />
