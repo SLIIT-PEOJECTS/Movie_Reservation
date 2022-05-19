@@ -10,16 +10,22 @@ import './Movie.css';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { getToken } from '../../Services/SessionManager';
 
 const DisplayAll = () => {
 
     const [movies, setMovies] = useState([]);
     const [count, setCount] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
+    const [token, setToken] = useState('');
 
     // Fetch All Movies
     const fetchMovies = () => {
-        axios.get("http://localhost:8081/movie/")
+        axios.get("http://localhost:8081/movie/", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 setMovies(response.data)
@@ -43,7 +49,11 @@ const DisplayAll = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     axios
-                        .delete(`http://localhost:8081/movie/${id}`)
+                        .delete(`http://localhost:8081/movie/${id}`, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
                         .then(response => {
                             // alert(response.data.message);
                             Swal("The Movie is Deleted!", {
@@ -64,7 +74,11 @@ const DisplayAll = () => {
         const searchWord = event.target.value;
         console.log(searchWord);
         setWordEntered(searchWord);
-        axios.get("http://localhost:8081/movie/")
+        axios.get("http://localhost:8081/movie/", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 const newFilter = movies.filter((response) => {
@@ -82,6 +96,9 @@ const DisplayAll = () => {
     };
 
     useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
         fetchMovies();
     }, [])
 
