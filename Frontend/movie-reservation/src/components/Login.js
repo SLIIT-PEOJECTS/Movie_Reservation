@@ -142,6 +142,9 @@ function Login(props) {
                             Forgot password?
                           </a>
                         </div>
+                        <div class="text-center"> Are you an Admin or Manager? &nbsp;
+                          <a class="small" href="/admin-login">Admin Login</a>
+                        </div>
                       </div>
                     </form>
                   </div>
