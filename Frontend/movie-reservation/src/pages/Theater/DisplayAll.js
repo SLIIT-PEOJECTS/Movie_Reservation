@@ -10,16 +10,22 @@ import './Theater.css';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
+import { getToken } from '../../Services/SessionManager';
 
 const DisplayAll = () => {
 
     const [theater, setTheater] = useState([]);
     const [count, setCount] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
+    const [token, setToken] = useState('');
 
     // Fetch All Theaters
     const fetchTheater = () => {
-        axios.get("http://localhost:8081/theater/")
+        axios.get("http://localhost:8081/theater/", {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 setTheater(response.data)
@@ -43,7 +49,11 @@ const DisplayAll = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     axios
-                        .delete(`http://localhost:8081/theater/${id}`)
+                        .delete(`http://localhost:8081/theater/${id}`, {
+                            headers: {
+                                'Authorization': `Bearer ${getToken()}`
+                            }
+                        })
                         .then(response => {
                             // alert(response.data.message);
                             Swal("The Theater is Deleted!", {
@@ -64,7 +74,11 @@ const DisplayAll = () => {
         const searchWord = event.target.value;
         console.log(searchWord);
         setWordEntered(searchWord);
-        axios.get("http://localhost:8081/theater/")
+        axios.get("http://localhost:8081/theater/", {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
             .then(response => {
                 console.log(response)
                 const newFilter = theater.filter((response) => {
@@ -82,6 +96,9 @@ const DisplayAll = () => {
     };
 
     useEffect(() => {
+        const tk = getToken();
+        setToken(tk);
+        console.log(token);
         fetchTheater();
     }, [])
 

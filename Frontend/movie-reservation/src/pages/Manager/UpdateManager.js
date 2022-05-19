@@ -52,7 +52,7 @@ const UpdateStaffMember = props => {
         axios
             .get(`http://localhost:8081/manager/${id}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then(response => {
@@ -188,7 +188,7 @@ const UpdateStaffMember = props => {
         axios
             .put(`http://localhost:8081/manager/${id}`, { firstName, middleName, lastName, mobileNumber, email, DOB, address, nic, type, accountStatus, profileURL }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then(response => {

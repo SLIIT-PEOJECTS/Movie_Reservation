@@ -261,7 +261,7 @@ const AddMovie = () => {
                 movieURL,
             }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then((response) => {

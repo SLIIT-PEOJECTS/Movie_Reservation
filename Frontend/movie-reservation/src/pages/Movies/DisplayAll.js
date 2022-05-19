@@ -23,7 +23,7 @@ const DisplayAll = () => {
     const fetchMovies = () => {
         axios.get("http://localhost:8081/movie/", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         })
             .then(response => {
@@ -51,7 +51,7 @@ const DisplayAll = () => {
                     axios
                         .delete(`http://localhost:8081/movie/${id}`, {
                             headers: {
-                                'Authorization': `Bearer ${token}`
+                                'Authorization': `Bearer ${getToken()}`
                             }
                         })
                         .then(response => {
@@ -76,7 +76,7 @@ const DisplayAll = () => {
         setWordEntered(searchWord);
         axios.get("http://localhost:8081/movie/", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         })
             .then(response => {

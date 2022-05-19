@@ -208,7 +208,7 @@ const UpdateMovie = props => {
         axios
             .get(`http://localhost:8081/movie/${id}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then(response => {
@@ -433,7 +433,7 @@ const UpdateMovie = props => {
                 movieURL,
             }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${getToken()}`
                 }
             })
             .then(response => {

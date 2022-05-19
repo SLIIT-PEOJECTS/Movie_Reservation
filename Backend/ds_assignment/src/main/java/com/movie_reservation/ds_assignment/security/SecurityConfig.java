@@ -19,6 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/private").authenticated()
                 .mvcMatchers("/manager/*").authenticated()
                 .mvcMatchers(HttpMethod.POST,"/movie/").authenticated()
+                .mvcMatchers(HttpMethod.PUT,"/movie/").authenticated()
+                .mvcMatchers(HttpMethod.POST,"/theater/").authenticated()
+                .mvcMatchers(HttpMethod.PUT,"/theater/").authenticated()
                 .and().cors()
                 .and().oauth2ResourceServer().jwt();
     }
@@ -28,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 web.ignoring()
                 .antMatchers("/manager/login")
                 .antMatchers("/manager/token")
-                .antMatchers(HttpMethod.GET,"/movie/*");
+                .antMatchers(HttpMethod.GET,"/movie/*")
+                .antMatchers(HttpMethod.GET,"/theater/*");
     }
 
 }
