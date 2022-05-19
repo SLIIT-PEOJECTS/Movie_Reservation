@@ -73,10 +73,7 @@ function LoginScreen(props) {
                             confirmButtonText: 'Try again'
                         });
                     }
-
-
                 }
-
             })
             .catch(error => {
                 Swal.fire({
