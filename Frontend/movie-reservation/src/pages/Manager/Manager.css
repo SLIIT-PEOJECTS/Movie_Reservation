@@ -44,7 +44,7 @@
      min-width: 0;
      word-wrap: break-word;
      background-color: #fff;
-     background-clip: border-box;
+     /* background-clip: border-box; */
      border: 1px solid #d2d2dc;
      border-radius: 0
  }
