@@ -32,3 +32,25 @@
   margin-right: auto;
 }
 
+.now-screen{
+  display: flex;
+}
+
+.now-screen .animation{
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+  }
+
+.now-screen p{
+  margin-left: 10px;
+  padding: 2px;
+  font-weight: bold;
+  color: #d9534f;
+  opacity: 60%;
+}
+
