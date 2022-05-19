@@ -6,7 +6,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert";
-// import './Theater.css';
 import './Session.css';
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import Navbar from "../../components/dashboard/Navbar";
