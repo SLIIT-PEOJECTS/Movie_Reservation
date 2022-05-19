@@ -6,16 +6,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { authenticate, getUser } from '../../Services/SessionManager';
+const Swal = require('sweetalert2');
 
 function LoginScreen(props) {
 
+    // State
     const [email, setEmail] = useState('')
     const [token, setToken] = useState('');
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [manager, setManager] = useState([])
     const delay = ms => new Promise(res => setTimeout(res, ms));
-    const Swal = require('sweetalert2');
 
     useEffect(() => {
         const id = getUser();
@@ -24,8 +25,9 @@ function LoginScreen(props) {
         }
     }, []);
 
+
+    // Login Function
     async function Login() {
-        // const user = { email, password }
         console.log(email, password);
         axios.post('http://localhost:8081/manager/login', { email, password })
             .then(mresponse => {
@@ -62,15 +64,6 @@ function LoginScreen(props) {
                                 authenticate(mresponse, response.data.response, () => window.location.href = `/movie`, 10000);
                             })
                             .catch(error => alert("Error Fetching Token"));
-
-                        // setTimeout(() => { authenticate(response, token, () => window.location.href = `/movie`, 5000) }, 4000);
-                        // authenticate(response, token, () => window.location.href = `/movie`, 5000);
-
-
-                        // alert("Active Account")
-                        //response will contain token and name
-                        // authenticate(response, () => props.history.push('/create'));
-                        // setTimeout(() => { window.location.href = `/movie` }, 2000);
                     }
                     else {
                         Swal.fire({
@@ -116,7 +109,6 @@ function LoginScreen(props) {
                                         value={email}
                                         onChange={(e) => { setEmail(e.target.value) }} />
                                 </div>
-
                                 <div className="form-group" style={{ marginBottom: '15px' }}>
                                     <label style={{ marginBottom: '5px' }}>Password</label>
                                     <input required type='password'
@@ -125,9 +117,6 @@ function LoginScreen(props) {
                                         value={password}
                                         onChange={(e) => { setPassword(e.target.value) }} />
                                 </div><br />
-
-
-
                                 <button onClick={Login}
                                     className="btn btn-info btn-block btn-lg login-btn"
                                     style={{ marginTop: '15px' }}><i class="fas fa-sign-in-alt"> Login</i>
@@ -136,14 +125,8 @@ function LoginScreen(props) {
                                 <br />
                                 Want to go <a href="/home">Back to Main Page ?</a>
                                 <br />
-
-
-
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
             </div><br /><br /><br />

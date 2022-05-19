@@ -14,16 +14,19 @@ import { getToken } from '../../Services/SessionManager';
 
 const DisplayAll = () => {
 
+    // States
     const [manager, setManager] = useState([])
     const [wordEntered, setWordEntered] = useState("");
     const [count, setCount] = useState([]);
     const [token, setToken] = useState([]);
 
+    // Use effect to execute code 1
     useEffect(() => {
         setToken(getToken());
         console.log(getToken());
     }, [])
 
+    // Use effect to execute code 1
     useEffect(() => {
         fetchManager();
     }, [])
