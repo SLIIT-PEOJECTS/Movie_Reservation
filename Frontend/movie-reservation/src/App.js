@@ -21,6 +21,7 @@ import PrivateRoute from './Services/PrivateRouteManager';
 import { getUser } from './Services/SessionManager';
 import Popup from './components/Popup';
 import AddSession from './pages/SessionManager/AddSession';
+import DisplayAllSession from './pages/SessionManager/DisplayAll';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/view" element={<DetailView />} />
           <Route path="/popup" element={<Popup />} />
           <Route path="/new-session" element={<AddSession />} />
+          <Route path="/session" element={<DisplayAllSession />} />
         </Routes>
       </Router>
     </>
