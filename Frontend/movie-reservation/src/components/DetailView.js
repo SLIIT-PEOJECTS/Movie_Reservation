@@ -68,7 +68,7 @@ function DetailView() {
             </Col>
             <Col sm={6}>
               <div className="movie-details mt-5 movie">
-                <h2 className='movie-title'>
+                <h2 className='movie-title move-data'>
                   {movie.name} by {movie.director}
                 </h2>
                 <p>
@@ -98,11 +98,11 @@ function DetailView() {
                 
                 <br />
                 <div>
-                  <Button disabled={!movie.available} variant="secondary" size="lg" 
-                  onClick={() => {navigate(`/cart`);}}>
-                    Add To Cart</Button>
+                  <Button disabled={!movie.available} variant="secondary" size="lg"
+                   onClick={() => {navigate(`/cart/${movie.name}`);}}
+                   >Add To Cart</Button>
                 </div>
-
+                <br />
                 <div>
                   <QRCode
                     id="qr-gen"
@@ -111,6 +111,7 @@ function DetailView() {
                     level={"H"}
                     includeMargin={true}
                   />
+                  <br />
                   <br />
                   <Button variant="outline-dark" onClick={downloadQRCode} size="lg">Download QR Code</Button>
                 </div>
