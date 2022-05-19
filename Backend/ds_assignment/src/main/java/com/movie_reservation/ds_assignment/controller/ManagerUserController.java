@@ -80,7 +80,7 @@ public class ManagerUserController {
 
             sendEmail(managerUser.getEmail(), password);
 
-            ManagerUser managerList = managerUserRepository.save(new ManagerUser(managerUser.getId(), managerUser.getFirstName(), managerUser.getMiddleName(), managerUser.getLastName(), managerUser.getMobileNumber(), managerUser.getEmail(), managerUser.getDOB(), managerUser.getNIC(), managerUser.getAddress(), "manager", managerUser.getAccountStatus(), managerUser.getProfileURL(), password));
+            ManagerUser managerList = managerUserRepository.save(new ManagerUser(managerUser.getId(), managerUser.getFirstName(), managerUser.getMiddleName(), managerUser.getLastName(), managerUser.getMobileNumber(), managerUser.getEmail(), managerUser.getDOB(), managerUser.getNIC(), managerUser.getAddress(), managerUser.getType(), managerUser.getAccountStatus(), managerUser.getProfileURL(), password));
             return new ResponseEntity<>(managerList, HttpStatus.CREATED);
         }
         catch(DuplicateKeyException e) {
