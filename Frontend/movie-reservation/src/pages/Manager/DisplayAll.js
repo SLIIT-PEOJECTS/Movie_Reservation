@@ -198,7 +198,7 @@ const DisplayAll = () => {
                                         <tr key={i}>
                                             <th scope="row">{i + 1}</th>
 
-                                            <a href={`/singleProfile/${manager.id}`} style={{ textDecoration: 'none' }}>
+                                            <a href={`/update-profile/${manager.id}`} style={{ textDecoration: 'none' }}>
                                                 <td>{manager.id}</td>
                                             </a>
 
