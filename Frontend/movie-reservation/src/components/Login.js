@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  authenticateCustomer,
+  getCustomerUser,
+} from "../Services/SessionManager";
 import "../asset/css/Login.css";
 
 function Login(props) {
@@ -10,6 +14,17 @@ function Login(props) {
   const [manager, setManager] = useState([]);
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const Swal = require("sweetalert2");
+
+  useEffect(() => {
+    const id = getCustomerUser();
+    if (getCustomerUser()) {
+      window.location.href = `/home`;
+    }
+  }, []);
+
+  const routeChange = () => {
+    window.location.href = `/register`;
+  };
 
   async function Login() {
     // const user = { email, password }
@@ -26,9 +41,11 @@ function Login(props) {
             confirmButtonText: "Try again",
           });
         } else {
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 500);
+          authenticateCustomer(
+            mresponse,
+            () => (window.location.href = `/home`),
+            500
+          );
           const Swal = require("sweetalert2");
           Swal.fire({
             title: "Success!",
@@ -116,7 +133,7 @@ function Login(props) {
                         <button
                           class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                           type="button"
-                          onClick={() => this.routeChange()}
+                          onClick={() => routeChange()}
                         >
                           Create Account
                         </button>
