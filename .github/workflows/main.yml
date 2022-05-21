@@ -9,7 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
+        with: |
+          cd Backend/ds_assignment/
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "movie-reservasion-backend" 
           heroku_email: "researchprojectsliit@gmail.com"
