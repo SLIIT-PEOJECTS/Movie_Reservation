@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: | 
-          cd Backend/ds_assignment/
+          working-directory: ./Backend/ds_assignment/
           pwd
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
