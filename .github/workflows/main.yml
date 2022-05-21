@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: cd Frontend/movie-reservation
       - uses: akhileshns/heroku-deploy@v3.12.12
-        with: |
-          cd Backend/ds_assignment/
+        with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "movie-reservasion-backend" 
           heroku_email: "researchprojectsliit@gmail.com"
