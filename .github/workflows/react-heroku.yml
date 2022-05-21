@@ -25,6 +25,6 @@ jobs:
         with:
           appdir: Frontend/movie-reservation
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "movie-reservasion-backend" 
+          heroku_app_name: "movie-reservasion-frontend" 
           heroku_email: "researchprojectsliit@gmail.com"
 
