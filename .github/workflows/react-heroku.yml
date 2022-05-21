@@ -14,8 +14,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 17.x
-      - run: npm install
-      - run: npm run build --if-present
+      - run: |
+          cd Frontend/movie-reservation
+          npm install
+      - run: |
+          cd Frontend/movie-reservation
+          npm run build --if-present
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
