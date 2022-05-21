@@ -17,7 +17,7 @@ jobs:
       - name: Deploy to heroku using an action
         uses: akhileshns/heroku-deploy@v3.2.6
         with:
-          appdir: Backend/ds_assignment/
+          appdir: Backend/ds_assignment/pom.xml
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "movie-reservasion-backend" 
           heroku_email: "researchprojectsliit@gmail.com"
