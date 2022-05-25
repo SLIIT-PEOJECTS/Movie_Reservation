@@ -32,7 +32,7 @@ public class ManagerUserController {
                     .body("{\n" +
                             "    \"from\": \"isurupathumherath1@gmail.com\",\n" +
                             "    \"to\": \"" + emailAddress + " \",\n" +
-                            "    \"subject\": \"Sample email\",\n" +
+                            "    \"subject\": \"Manager User Details\",\n" +
                             "    \"content\": \"Hi, \n\nPlease find your username and password mentioned below.\n\n   Username: " + emailAddress + "\n   Password: " + password + "\n\nIf you have any login issue, please contact admin - 0761714844\n\nThank You and Best Regards\nAutomated Mail System\n@isurupathumherath \",\n" +
                             "    \"contentType\":\"text/plain\"\n" +
                             "}")
