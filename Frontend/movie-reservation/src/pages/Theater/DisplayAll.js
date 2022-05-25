@@ -195,8 +195,8 @@ const DisplayAll = () => {
                                         <th>City</th>
                                         <th>Close</th>
                                         <th>No of Seats</th>
-                                        {/* <th>Language</th>
-                                        <th>Type</th> */}
+                                        <th>Hall Price</th>
+                                        {/* <th>Type</th> */}
                                         {/* <th>Created At</th> */}
                                         <th></th>
                                     </tr>
@@ -214,8 +214,8 @@ const DisplayAll = () => {
                                             <td>{theater.city}</td>
                                             <td>{theater.close.toString()}</td>
                                             <td>{theater.noOfSeat}</td>
-                                            {/* <td>{theater.language}</td>
-                                            <td>{theater.tags.join("/")}</td> */}
+                                            <td>{theater.price}</td>
+                                            {/* <td>{theater.tags.join("/")}</td> */}
                                             { }
 
                                             <td>

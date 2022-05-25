@@ -21,6 +21,7 @@ const AddTheater = () => {
         city: "",
         close: "",
         noOfSeat: "",
+        price: "",
     });
 
     //destructure values from state
@@ -30,6 +31,7 @@ const AddTheater = () => {
         city,
         close,
         noOfSeat,
+        price,
     } = state;
 
     //Change Hander
@@ -48,6 +50,7 @@ const AddTheater = () => {
             city,
             close,
             noOfSeat,
+            price,
         });
 
         axios
@@ -57,6 +60,7 @@ const AddTheater = () => {
                 city,
                 close,
                 noOfSeat,
+                price,
             }, {
                 headers: {
                     'Authorization': `Bearer ${getToken()}`
@@ -82,6 +86,7 @@ const AddTheater = () => {
                     city: "",
                     close: "",
                     noOfSeat: "",
+                    price: "",
                 });
 
             })
@@ -226,7 +231,13 @@ const AddTheater = () => {
                                     <div class="col">
                                         <div className="form-group">
                                             <label className="text-muted">Number of Seats</label>
-                                            <input type="text" onChange={handleChange('noOfSeat')} value={noOfSeat} className="form-control" placeholder="Enter the Release Date" pattern="[0-9]+" title="Please enter only numbers" required />
+                                            <input type="text" onChange={handleChange('noOfSeat')} value={noOfSeat} className="form-control" placeholder="Enter Number of Seats" pattern="[0-9]+" title="Please enter only numbers" required />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div className="form-group">
+                                            <label className="text-muted">Hall Price</label>
+                                            <input type="text" onChange={handleChange('price')} value={price} className="form-control" placeholder="Enter the Hall Price (Rs.)" pattern="[0-9]+" title="Please enter only numbers" required />
                                         </div>
                                     </div>
                                 </div>
