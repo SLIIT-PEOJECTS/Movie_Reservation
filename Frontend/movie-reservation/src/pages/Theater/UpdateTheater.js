@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { getToken } from '../../Services/SessionManager';
 
 import './Theater.css';
 import Navbar from '../../components/dashboard/Navbar';
@@ -23,6 +24,7 @@ const UpdateTheater = props => {
         city: "",
         close: "",
         noOfSeat: "",
+        price: "",
     });
 
     //destructure values from state
@@ -32,6 +34,7 @@ const UpdateTheater = props => {
         city,
         close,
         noOfSeat,
+        price,
     } = state;
 
     console.log(`PROP TEST: ${id}`)
@@ -47,6 +50,7 @@ const UpdateTheater = props => {
                     city,
                     close,
                     noOfSeat,
+                    price,
                 } = response.data
 
                 setState({
@@ -56,6 +60,7 @@ const UpdateTheater = props => {
                     city,
                     close,
                     noOfSeat,
+                    price,
                 });
             })
             .catch(error => alert('Error Loading Update Theater'));
@@ -152,6 +157,12 @@ const UpdateTheater = props => {
                         <input type="text" onChange={handleChange('noOfSeat')} value={noOfSeat} className="form-control" placeholder="Enter the Release Date" pattern="[0-9]+" title="Please enter only numbers" required />
                     </div>
                 </div>
+                <div class="col">
+                    <div className="form-group">
+                        <label className="text-muted">Hall Price</label>
+                        <input type="text" onChange={handleChange('price')} value={price} className="form-control" placeholder="Enter the Hall Price (Rs.)" pattern="[0-9]+" title="Please enter only numbers" required />
+                    </div>
+                </div>
             </div>
             <br />
 
@@ -177,6 +188,7 @@ const UpdateTheater = props => {
             city,
             close,
             noOfSeat,
+            price
         })
         axios
             .put(`http://localhost:8081/theater/${id}`, {
@@ -185,6 +197,11 @@ const UpdateTheater = props => {
                 city,
                 close,
                 noOfSeat,
+                price
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             })
             .then(response => {
 
@@ -195,6 +212,7 @@ const UpdateTheater = props => {
                     city,
                     close,
                     noOfSeat,
+                    price
                 } = response.data
 
                 //empty state
@@ -205,6 +223,7 @@ const UpdateTheater = props => {
                     city,
                     close,
                     noOfSeat,
+                    price
                 });
 
                 //show success alert

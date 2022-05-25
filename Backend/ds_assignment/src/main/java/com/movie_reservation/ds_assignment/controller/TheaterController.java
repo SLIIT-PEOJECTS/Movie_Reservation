@@ -27,7 +27,7 @@ public class TheaterController {
     @PostMapping("/")
     public ResponseEntity<Theater> createTheater(@RequestBody Theater theater) {
         try {
-            Theater theaterList = theaterRepository.save(new Theater(theater.getId(), theater.getName(), theater.getAddress(), theater.getCity(), theater.getClose(), theater.getNoOfSeat()));
+            Theater theaterList = theaterRepository.save(new Theater(theater.getId(), theater.getName(), theater.getAddress(), theater.getCity(), theater.getClose(), theater.getNoOfSeat(), theater.getPrice()));
             return new ResponseEntity<>(theaterList, HttpStatus.CREATED);
         } catch (Exception e) {
             System.out.println("Error :- " + e.getMessage());
@@ -87,6 +87,7 @@ public class TheaterController {
             theaterList.setCity(theater.getCity());
             theaterList.setClose(theater.getClose());
             theaterList.setNoOfSeat(theater.getNoOfSeat());
+            theaterList.setPrice(theater.getPrice());
             return new ResponseEntity<>(theaterRepository.save(theaterList), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
