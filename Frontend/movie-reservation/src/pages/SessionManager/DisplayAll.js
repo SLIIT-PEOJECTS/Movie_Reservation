@@ -210,7 +210,7 @@ const DisplayAll = () => {
                       {}
 
                       <td>
-                        <a className="" href={`/update-session/${session.id}`}>
+                        <a className="" href={`/update-session/${session.sessionID}`}>
                           <i className="fas fa-edit"></i>&nbsp;
                         </a>
                         &nbsp;
