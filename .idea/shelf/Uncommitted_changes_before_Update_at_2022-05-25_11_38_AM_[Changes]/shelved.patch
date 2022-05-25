@@ -1,0 +1,334 @@
+Index: Backend/untitled/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/.idea/misc.xml b/Backend/untitled/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1653057720319)
++++ b/Backend/untitled/.idea/misc.xml	(date 1653057720319)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="17" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: Backend/untitled/.idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/.idea/modules.xml b/Backend/untitled/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1653057393749)
++++ b/Backend/untitled/.idea/modules.xml	(date 1653057393749)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/untitled.iml" filepath="$PROJECT_DIR$/untitled.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: Backend/untitled/.idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/.idea/runConfigurations.xml b/Backend/untitled/.idea/runConfigurations.xml
+new file mode 100644
+--- /dev/null	(date 1653057393850)
++++ b/Backend/untitled/.idea/runConfigurations.xml	(date 1653057393850)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RunConfigurationProducerService">
++    <option name="ignoredProducers">
++      <set>
++        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
++      </set>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: Backend/untitled/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/.idea/vcs.xml b/Backend/untitled/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1653057393872)
++++ b/Backend/untitled/.idea/vcs.xml	(date 1653057393872)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: Backend/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/pom.xml b/Backend/pom.xml
+new file mode 100644
+--- /dev/null	(date 1653398735564)
++++ b/Backend/pom.xml	(date 1653398735564)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project xmlns="http://maven.apache.org/POM/4.0.0"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++    <modelVersion>4.0.0</modelVersion>
++
++    <groupId>groupId</groupId>
++    <artifactId>Backend</artifactId>
++    <version>1.0-SNAPSHOT</version>
++
++    
++</project>
+\ No newline at end of file
+Index: Backend/untitled/src/Topping.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/src/Topping.java b/Backend/untitled/src/Topping.java
+new file mode 100644
+--- /dev/null	(date 1653059250690)
++++ b/Backend/untitled/src/Topping.java	(date 1653059250690)
+@@ -0,0 +1,64 @@
++public class Topping {
++    private int price;
++    private String flavour;
++
++    public void setPrice(int price){
++        this.price = price;
++    }
++    public void setFlavour(String flavour){
++        this.flavour = flavour;
++    }
++
++    public int getPrice(){
++        return this.price;
++    }
++
++    public String getFlavour(){
++        return this.flavour;
++    }
++
++}
++
++class IceCream{
++    int getPrice(int toppingPrice){
++        return 100+toppingPrice;
++    }
++}
++
++//class plainIceCream extends IceCream{
++//    int getPrice(){
++//        return 100;
++//    }
++//}
++//
++//class chocTopIceCream extends IceCream{
++//    int getPrice(int toppinPrice){
++//        return (100 + toppinPrice);
++//    }
++//}
++
++
++class  VenderMachine{
++    public static void main(String arg[]){
++        Topping topping = new Topping();
++        IceCream iceCream = new IceCream();
++//        plainIceCream plainIceCream = new plainIceCream();
++//        chocTopIceCream chocTopIceCream = new chocTopIceCream();
++
++//        System.out.println("Normal IceCream ="+ (plainIceCream.getPrice()));
++
++        topping.setFlavour("chocolate");
++        topping.setPrice(100);
++        int topPrice = topping.getPrice();
++
++        System.out.println(topping.getFlavour() + "IceCream Price =");
++        System.out.println(iceCream.getPrice(topPrice));
++
++
++        topping.setFlavour("Whipped cream");
++        topping.setPrice(350);
++        topPrice = topping.getPrice();
++        System.out.println(topping.getFlavour() + "IceCream Price =");
++        System.out.println(iceCream.getPrice(topPrice));
++    }
++}
+\ No newline at end of file
+Index: Backend/.idea/Backend.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\" />\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/.idea/Backend.iml b/Backend/.idea/Backend.iml
+--- a/Backend/.idea/Backend.iml	(revision 4bc0fbd2a57686d9a8774aaa9374ebc2dfcd80a0)
++++ b/Backend/.idea/Backend.iml	(date 1653458166666)
+@@ -1,9 +1,37 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$" />
++<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="web" name="Web">
++      <configuration>
++        <descriptors>
++          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/web/WEB-INF/web.xml" />
++        </descriptors>
++        <webroots>
++          <root url="file://$MODULE_DIR$/web" relative="/" />
++        </webroots>
++        <sourceRoots>
++          <root url="file://$MODULE_DIR$/src/main/java" />
++          <root url="file://$MODULE_DIR$/src/main/resources" />
++        </sourceRoots>
++      </configuration>
++    </facet>
++    <facet type="Spring" name="Spring">
++      <configuration />
++    </facet>
++  </component>
++  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
++    <output url="file://$MODULE_DIR$/target/classes" />
++    <output-test url="file://$MODULE_DIR$/target/test-classes" />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
++      <excludeFolder url="file://$MODULE_DIR$/target" />
++    </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
++    <orderEntry type="library" name="Spring MVC-5.2.3.RELEASE" level="project" />
++    <orderEntry type="library" name="Spring Data JPA-2.2.4.RELEASE" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: Backend/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c16326df-e2e0-41a6-a743-c78d539f48e7\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GithubProjectSettings\">\r\n    <option name=\"branchProtectionPatterns\">\r\n      <list>\r\n        <option value=\"main\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"29Fjv02zx5UKcVtXnQGericf7jd\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c16326df-e2e0-41a6-a743-c78d539f48e7\" name=\"Changes\" comment=\"\" />\r\n      <created>1652715953411</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1652715953411</updated>\r\n      <workItem from=\"1652715956913\" duration=\"468000\" />\r\n      <workItem from=\"1652716491559\" duration=\"140000\" />\r\n      <workItem from=\"1652886604430\" duration=\"63000\" />\r\n      <workItem from=\"1652959588428\" duration=\"330000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/.idea/workspace.xml b/Backend/.idea/workspace.xml
+--- a/Backend/.idea/workspace.xml	(revision 4bc0fbd2a57686d9a8774aaa9374ebc2dfcd80a0)
++++ b/Backend/.idea/workspace.xml	(date 1653458833848)
+@@ -1,11 +1,31 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c16326df-e2e0-41a6-a743-c78d539f48e7" name="Changes" comment="" />
++    <list default="true" id="c16326df-e2e0-41a6-a743-c78d539f48e7" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/misc.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/modules.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/runConfigurations.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/untitled/src/Topping.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Backend.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="spring-beans.schema" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+@@ -17,6 +37,13 @@
+       </list>
+     </option>
+   </component>
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="usePluginRegistry" value="true" />
++      </MavenGeneralSettings>
++    </option>
++  </component>
+   <component name="ProjectId" id="29Fjv02zx5UKcVtXnQGericf7jd" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+@@ -28,6 +55,13 @@
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++    <property name="nodejs_package_manager_path" value="npm" />
++    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
++  </component>
++  <component name="RunAnythingCache">
++    <option name="myCommands">
++      <command value="mvn clean install" />
++    </option>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -41,6 +75,9 @@
+       <workItem from="1652716491559" duration="140000" />
+       <workItem from="1652886604430" duration="63000" />
+       <workItem from="1652959588428" duration="330000" />
++      <workItem from="1653396917563" duration="662000" />
++      <workItem from="1653457152210" duration="855000" />
++      <workItem from="1653458048379" duration="764000" />
+     </task>
+     <servers />
+   </component>
+@@ -59,4 +96,8 @@
+     </option>
+     <option name="oldMeFiltersMigrated" value="true" />
+   </component>
++  <component name="XSLT-Support.FileAssociations.UIState">
++    <expand />
++    <select />
++  </component>
+ </project>
+\ No newline at end of file
+Index: Backend/untitled/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Backend/untitled/.idea/.gitignore b/Backend/untitled/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1653057407409)
++++ b/Backend/untitled/.idea/.gitignore	(date 1653057407409)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml

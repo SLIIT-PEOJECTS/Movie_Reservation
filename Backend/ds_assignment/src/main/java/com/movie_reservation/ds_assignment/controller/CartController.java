@@ -24,6 +24,7 @@ public class CartController {
 
     @PostMapping("/")
     public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
+
         try {
             Cart cartList = cartRepository.save(new Cart(cart.getId(), cart.getUserId(), cart.getMovieId(), cart.getMovieName(), cart.getMoviePrice()));
             return new ResponseEntity<>(cartList, HttpStatus.CREATED);

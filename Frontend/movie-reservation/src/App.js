@@ -52,8 +52,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cart/:moviename" element={<Cart />} />
-          <Route path="/view/:movieid" element={<DetailView />} />
+          <Route path="/cart/:userid" element={<Cart />} />
+          <Route path="/view/:movieid/:moviename" element={<DetailView />} />
           <Route path="/popup" element={<Popup />} />
           <Route path="/new-session" element={<AddSession />} />
           <Route path="/session" element={<DisplayAllSession />} />
