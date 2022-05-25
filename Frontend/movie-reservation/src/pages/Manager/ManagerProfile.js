@@ -93,7 +93,7 @@ const ManagerProfile = props => {
                                                         <h6 className="mb-0">Manager ID</h6>
                                                     </div>
                                                     <div className="col-sm-9 text-blue">
-                                                        {manager.employeeId}
+                                                        {manager.id}
                                                     </div>
                                                 </div>
                                                 <hr />
