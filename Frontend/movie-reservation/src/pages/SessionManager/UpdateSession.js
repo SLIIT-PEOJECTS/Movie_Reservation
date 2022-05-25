@@ -16,7 +16,7 @@ const UpdateSession = (props) => {
   });
 
   //destructure values from state
-  const { sessionName, fromTime, toTime,} = state;
+  const { sessionName, fromTime, toTime } = state;
 
   console.log(`PROP TEST: ${id}`);
 
@@ -29,9 +29,10 @@ const UpdateSession = (props) => {
 
         setState({
           ...state,
-          sessionName, 
-          fromTime, 
-          toTime
+          sessionName,
+          sessionName,
+          fromTime,
+          toTime,
         });
       })
       .catch((error) => alert("Error Loading Update Session"));
@@ -101,30 +102,27 @@ const UpdateSession = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.table({
-        sessionName, 
-        fromTime, 
-        toTime,
+      sessionName,
+      fromTime,
+      toTime,
     });
     axios
       .put(`http://localhost:8081/session/${id}`, {
-        sessionName, 
-          fromTime, 
-          toTime,
+        sessionName,
+        fromTime,
+        toTime,
       })
       .then((response) => {
         console.log(response);
-        const { sessionName, 
-            fromTime, 
-            toTime } = response.data;
+        const { sessionName, fromTime, toTime } = response.data;
 
         //empty state
         setState({
           ...state,
-          sessionName, 
-            fromTime, 
-            toTime,
+          sessionName,
+          fromTime,
+          toTime,
         });
-
         //show success alert
         // alert(`Staff Member ${firstName} is Updated`);
         Swal.fire(
