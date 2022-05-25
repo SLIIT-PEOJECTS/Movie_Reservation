@@ -121,8 +121,8 @@ const Sidebar = () => {
                             )}
                         </div>
 
-                        <NavLink exact to="/analytics" activeClassName="activeClicked">
-                            <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
+                        <NavLink exact to="/session" activeClassName="activeClicked">
+                            <CDBSidebarMenuItem icon="chart-line">Session</CDBSidebarMenuItem>
                         </NavLink>
 
                         <NavLink onClick={() => logoutFromSession()} exact to="#" activeClassName="activeClicked">
