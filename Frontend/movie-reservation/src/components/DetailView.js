@@ -46,7 +46,7 @@ function DetailView() {
     //     let tagName = movie.tags[i];
     //     tags.push(<Badge pill bg="warning" text="dark">{tagName}</Badge>);
     // }
-
+    // ressearchprojectssliit@gmail.com
     return (
       <>
         <Header tab="Movie View" />

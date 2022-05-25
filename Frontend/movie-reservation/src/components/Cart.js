@@ -10,6 +10,7 @@ import { TrashFill } from "react-bootstrap-icons";
 import { Button, Modal, Form,} from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
+import PaypalButton from './PaypalButton';
 
 function Carts() {
   let {moviename} = useParams();
@@ -61,6 +62,14 @@ function Carts() {
     getSessionList();
     getTheaterList();
   },[])
+
+
+  // const script = document.createElement("script");
+
+  //   script.src = "https://www.paypal.com/sdk/js?client-id=AfkFATvgg2kWJBxv-2cA2U1xqBRWCnSqzmf1d9hpPM8juiYTcLgXEaC_Je_Cw2YprI0OolF78eovfaWW&currency=USD&intent=capture&enable-funding=venmo";
+  //   script.async = true;
+
+  //   document.body.appendChild(script);
 
   return (
     <div className="App">
@@ -136,7 +145,7 @@ function Carts() {
                         <a href="" class="btn btn-light">
                           {" "}
                           Purchase
-                        </a>
+                        </a>                        
                       </td>
                       <td>
                         <div>
@@ -150,10 +159,9 @@ function Carts() {
                 </table>
 
                 <div class="card-body border-top">
-                  <a href="https://sandbox.payhere.co/your-co/payment-link-name?amount_in_cents=4200&hide_amount=yes" class="btn btn-primary float-md-right">
+                  <a href="" class="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i class="fa fa-chevron-right"></i>{" "}
-                    
                   </a>
                   <a
                     href="#"
@@ -213,12 +221,16 @@ function Carts() {
                     </dd>
                   </dl>
                   <hr />
-                  <p class="text-center mb-3">
+                  {/* <p class="text-center mb-3">
                     <img
                       src="https://flyclipart.com/thumb2/paypal-credit-card-logos-png-672268.png"
                       height="26"
                     />
-                  </p>
+                  </p> */}
+                  <PaypalButton
+                        total={'100'}
+                        clearCart={'clearCart'}
+                        history={'history'} />
                 </div>
               </div>
             </aside>
@@ -236,28 +248,28 @@ function Carts() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-          {sessions.map((data) => ( 
-            <Form.Check
-            name="group1"
-            type='radio'
-            id='session'
-            value={`${data.sessionName}`}
-            onChange={onChangeSession}
-            label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
-          />
-          ))}   
+            {sessions.map((data) => (
+              <Form.Check
+                name="group1"
+                type="radio"
+                id="session"
+                value={`${data.sessionName}`}
+                onChange={onChangeSession}
+                label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
+              />
+            ))}
 
-          {theaters.map((data) => (
-            <Form.Check
-            name="group2"
-            type='radio'
-            id='theater'
-            onChange={onChangeTheater}
-            value={`${data.name}`}
-            label={`${data.name} - ${data.address} ${data.city}`}
-          />
-          ))}        
-        </Form>
+            {theaters.map((data) => (
+              <Form.Check
+                name="group2"
+                type="radio"
+                id="theater"
+                onChange={onChangeTheater}
+                value={`${data.name}`}
+                label={`${data.name} - ${data.address} ${data.city}`}
+              />
+            ))}
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
