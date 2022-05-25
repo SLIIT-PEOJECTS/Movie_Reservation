@@ -210,9 +210,9 @@ const DisplayAll = () => {
                       {}
 
                       <td>
-                        {/* <a className="" href={`/update-theater/${theater.id}`}>
+                        <a className="" href={`/update-session/${session.id}`}>
                           <i className="fas fa-edit"></i>&nbsp;
-                        </a> */}
+                        </a>
                         &nbsp;
                         <a
                           className=""
