@@ -11,6 +11,8 @@ import { Button, Modal, Form,} from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
 import PaypalButton from './PaypalButton';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 function Carts() {
   let {moviename} = useParams();
@@ -145,7 +147,7 @@ function Carts() {
                         <a href="" class="btn btn-light">
                           {" "}
                           Purchase
-                        </a>                        
+                        </a>
                       </td>
                       <td>
                         <div>
@@ -228,9 +230,10 @@ function Carts() {
                     />
                   </p> */}
                   <PaypalButton
-                        total={'100'}
-                        clearCart={'clearCart'}
-                        history={'history'} />
+                    total={"100"}
+                    clearCart={"clearCart"}
+                    history={"history"}
+                  />
                 </div>
               </div>
             </aside>
@@ -248,7 +251,7 @@ function Carts() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            {sessions.map((data) => (
+            {/* {sessions.map((data) => (
               <Form.Check
                 name="group1"
                 type="radio"
@@ -257,9 +260,48 @@ function Carts() {
                 onChange={onChangeSession}
                 label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
               />
-            ))}
+            ))} */}
 
-            {theaters.map((data) => (
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Show Date
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {sessions.map((data) => (
+                  <Dropdown.Item key={data.id}>
+                    {data.sessionName}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+<br></br>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Show Time
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {sessions.map((data) => (
+                  <Dropdown.Item key={data.id}>
+                    {`${data.fromTime} - ${data.toTime}`}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+            <br></br>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Theater Location
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                {theaters.map((data) => (
+                  <Dropdown.Item key={data.id}>
+                    {`${data.name} - ${data.address} ${data.city}`}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+
+            {/* {theaters.map((data) => (
               <Form.Check
                 name="group2"
                 type="radio"
@@ -268,7 +310,7 @@ function Carts() {
                 value={`${data.name}`}
                 label={`${data.name} - ${data.address} ${data.city}`}
               />
-            ))}
+            ))} */}
           </Form>
         </Modal.Body>
         <Modal.Footer>
