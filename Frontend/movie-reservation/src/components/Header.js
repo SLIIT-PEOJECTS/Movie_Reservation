@@ -58,6 +58,9 @@ function Header(prop) {
             <Nav.Link>Halls</Nav.Link>
             {/* disabled */}
             <Nav.Link onClick={() => routeChange("/cart")}>My Cart</Nav.Link>
+            <Nav.Link onClick={() => routeChange("/user/profile")}>
+              My Profile
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <FormControl
@@ -68,13 +71,6 @@ function Header(prop) {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
-          {/* <Button
-            variant="danger"
-            style={{ marginLeft: "2rem" }}
-            onClick={() => routeChange("/login")}
-          >
-            Login/Signup
-          </Button> */}
           {getCustomerUser() ? (
             <Button
               variant="danger"

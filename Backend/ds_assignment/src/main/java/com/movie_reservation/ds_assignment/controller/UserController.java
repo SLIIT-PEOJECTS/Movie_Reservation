@@ -1,5 +1,6 @@
 package com.movie_reservation.ds_assignment.controller;
 
+import com.movie_reservation.ds_assignment.model.ManagerUser;
 import com.movie_reservation.ds_assignment.model.Tutorial;
 import com.movie_reservation.ds_assignment.model.User;
 import com.movie_reservation.ds_assignment.repository.UserRepository;
@@ -68,6 +69,16 @@ public class UserController {
         Optional<User> managerUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (managerUser.isPresent()) {
             return new ResponseEntity<>(managerUser.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<User> getById(@PathVariable("id") String id) {
+        Optional<User> user = userRepository.getById(id);
+        if (user.isPresent()) {
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

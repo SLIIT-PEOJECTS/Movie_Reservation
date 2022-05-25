@@ -6,24 +6,25 @@ import Cart from "./components/Cart";
 import Register from "./components/Registration";
 
 // Immport Router Files
-import Dashboard from './components/dashboard/DashboardLoder';
-import DisplayAllMovie from './pages/Movies/DisplayAll';
-import AddMovie from './pages/Movies/AddMovie';
-import UpdateMovie from './pages/Movies/UpdateMovie';
-import DisplayAllTheater from './pages/Theater/DisplayAll';
-import AddTheater from './pages/Theater/AddTheater';
-import UpdateTheater from './pages/Theater/UpdateTheater';
-import AddManager from './pages/Manager/AddManager';
-import DisplayManager from './pages/Manager/DisplayAll';
-import UpdateManager from './pages/Manager/UpdateManager';
-import DetailView from './components/DetailView';
-import AdminLogin from './pages/Manager/Login';
-import PrivateRoute from './Services/PrivateRouteManager';
-import AddSession from './pages/SessionManager/AddSession';
-import DisplayAllSession from './pages/SessionManager/DisplayAll';
-import ManagerProfile from './pages/Manager/ManagerProfile';
-import MovieProfile from './pages/Movies/MovieProfile';
+import Dashboard from "./components/dashboard/DashboardLoder";
+import DisplayAllMovie from "./pages/Movies/DisplayAll";
+import AddMovie from "./pages/Movies/AddMovie";
+import UpdateMovie from "./pages/Movies/UpdateMovie";
+import DisplayAllTheater from "./pages/Theater/DisplayAll";
+import AddTheater from "./pages/Theater/AddTheater";
+import UpdateTheater from "./pages/Theater/UpdateTheater";
+import AddManager from "./pages/Manager/AddManager";
+import DisplayManager from "./pages/Manager/DisplayAll";
+import UpdateManager from "./pages/Manager/UpdateManager";
+import DetailView from "./components/DetailView";
+import AdminLogin from "./pages/Manager/Login";
+import PrivateRoute from "./Services/PrivateRouteManager";
+import AddSession from "./pages/SessionManager/AddSession";
+import DisplayAllSession from "./pages/SessionManager/DisplayAll";
+import ManagerProfile from "./pages/Manager/ManagerProfile";
+import MovieProfile from "./pages/Movies/MovieProfile";
 import Popup from "./components/Popup";
+import Userprofile from "./components/Userprofile";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/popup" element={<Popup />} />
           <Route path="/new-session" element={<AddSession />} />
           <Route path="/session" element={<DisplayAllSession />} />
+          <Route path="/user/profile" element={<Userprofile />} />
         </Routes>
       </Router>
     </>
