@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert';
 import './Movie.css';
+import moment from 'moment';
 import Navbar from '../../components/dashboard/Navbar';
 import Sidebar from '../../components/dashboard/Sidebar';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
@@ -213,7 +214,7 @@ const DisplayAll = () => {
                                             <td>{movies.available.toString()}</td>
                                             <td>{movies.genre}</td>
                                             <td>{movies.rating}</td>
-                                            <td>{movies.releaseDate}</td>
+                                            <td>{moment.utc(movies.releaseDate).format('MM/DD/YYYY')}</td>
                                             <td>{movies.language}</td>
                                             <td>{movies.tags.join("/")}</td>
                                             {/* <td>{movies.createdAt}</td> */}
