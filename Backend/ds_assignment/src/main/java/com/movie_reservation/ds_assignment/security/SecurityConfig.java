@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manager/login")
                 .antMatchers("/manager/token")
                 .antMatchers(HttpMethod.GET,"/movie/*")
-                .antMatchers(HttpMethod.GET,"/theater/*");
+                .antMatchers(HttpMethod.GET,"/theater/*")
+                        .antMatchers("/user/*");
     }
 
 }
