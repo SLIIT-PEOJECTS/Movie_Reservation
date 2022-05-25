@@ -78,7 +78,7 @@ const ManagerProfile = props => {
                                                 <br />
                                                 <div className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                     <div className="col-sm-12">
-                                                        <a className="btn btn-info" style={{ width: "100%" }} href={`/update-profile/${id}`}>Edit</a>
+                                                        <a className="btn btn-info" style={{ width: "100%" }} href={`/update-manager/${id}`}>Edit</a>
                                                     </div>
                                                 </div>
                                             </ul>
