@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../asset/css/Cart.css";
 import { Cart } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TrashFill } from "react-bootstrap-icons";
-import { Button, Modal, Form,} from 'react-bootstrap';
+import { Button, Modal, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
 import PaypalButton from './PaypalButton';
@@ -15,63 +15,78 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
 function Carts() {
-  let {moviename} = useParams();
-
   const navigate = useNavigate();
   var theater;
   var session;
 
+  let { userid } = useParams();
+
   const [sessions, setSessions] = React.useState([]);
   const [theaters, setTheaters] = React.useState([]);
   const [radioValue, setRadioValue] = useState(0);
-
+  const [movie, setMovie] = React.useState([]);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const getSession = 'http://localhost:8081/session/.';
 
-  const getTheater = 'http://localhost:8081/theater/';
-     
-  const getSessionList = () =>{
-    axios.get(`${getSession}`).then((res)=>{
+  const getSession = "http://localhost:8081/session/.";
+  const getMovie = `http://localhost:8081/cart/${userid}`;
+  const delMovie = "http://localhost:8081/cart";
+  const getTheater = "http://localhost:8081/theater/";
+
+  const getSessionList = () => {
+    axios
+      .get(`${getSession}`)
+      .then((res) => {
         setSessions(res.data);
-    }).catch(error => console.error(`Error: ${error}`));    
-  }
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
 
-  const getTheaterList = () =>{
-    axios.get(`${getTheater}`).then((res)=>{
-      setTheaters(res.data);
-    }).catch(error => console.error(`Error: ${error}`))
-  }
+  const getTheaterList = () => {
+    axios
+      .get(`${getTheater}`)
+      .then((res) => {
+        setTheaters(res.data);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
+
+  const getMovieList = () => {
+    axios
+      .get(`${getMovie}`)
+      .then((res) => {
+        setMovie(res.data);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
 
   const onChangeTheater = (ev) => {
-    theater=ev.target.value;
+    theater = ev.target.value;
     console.log(theater);
   };
 
   const onChangeSession = (ev) => {
-    session=ev.target.value;
+    session = ev.target.value;
     console.log(session);
   };
 
-  const onClickPayment = (ev) => {    
+  const deleteMovie = async (id) =>{
+    axios.delete(`${delMovie}/${id}`).then((res) =>{
+      console.log(res);
+    })
+  }
+
+  const onClickPayment = (ev) => {
     setShow(false);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getSessionList();
     getTheaterList();
-  },[])
-
-
-  // const script = document.createElement("script");
-
-  //   script.src = "https://www.paypal.com/sdk/js?client-id=AfkFATvgg2kWJBxv-2cA2U1xqBRWCnSqzmf1d9hpPM8juiYTcLgXEaC_Je_Cw2YprI0OolF78eovfaWW&currency=USD&intent=capture&enable-funding=venmo";
-  //   script.async = true;
-
-  //   document.body.appendChild(script);
+    getMovieList();
+  }, []);
 
   return (
     <div className="App">
@@ -98,65 +113,64 @@ function Carts() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <figure class="itemside">
-                          <div class="aside">
-                            <img
-                              src="https://cdn.pixabay.com/photo/2016/03/31/18/36/cinema-1294496__340.png"
-                              class="img-sm"
-                              style={{ width: "3rem" }}
-                            />
+                    {movie.map((movie) => (
+                      <tr>
+                        <td>
+                          <figure class="itemside">
+                            <div class="aside">
+                              <img
+                                src="https://cdn.pixabay.com/photo/2016/03/31/18/36/cinema-1294496__340.png"
+                                class="img-sm"
+                                style={{ width: "3rem" }}
+                              />
+                            </div>
+                            <figcaption class="info">
+                              <a href="#" class="title text-dark">
+                                {movie.movieName}
+                              </a>
+                              <p class="text-muted small">
+                                choose tickect amount <br /> pay with your card
+                              </p>
+                            </figcaption>
+                          </figure>
+                        </td>
+                        <td>
+                          <select class="form-control">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <div class="price-wrap">
+                            <var class="price"></var>
+                            <small class="text-muted"></small>
                           </div>
-                          <figcaption class="info">
-                            <a href="#" class="title text-dark">
-                              {moviename}
-                            </a>
-                            <p class="text-muted small">
-                              choose tickect amount <br /> pay with your card
-                            </p>
-                          </figcaption>
-                        </figure>
-                      </td>
-                      <td>
-                        <select class="form-control">
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
-                      </td>
-                      <td>
-                        <div class="price-wrap">
-                          <var class="price">Rs.1156.00</var>
-                          <small class="text-muted"> Rs.315.20 each </small>
-                        </div>
-                      </td>
-                      <td class="text-right">
-                        <a
-                          data-original-title="Save to Wishlist"
-                          title=""
-                          href=""
-                          class="btn btn-light mr-2"
-                          data-toggle="tooltip"
-                        >
-                          <TrashFill color="#ef5350" />
-                        </a>
-                        <a href="" class="btn btn-light">
-                          {" "}
-                          Purchase
-                        </a>
-                      </td>
-                      <td>
-                        <div>
-                          <Button variant="dark" onClick={handleShow}>
-                            Session
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td class="text-right">
+                          <a
+                            class="btn btn-light mr-2"
+                            onClick={() => deleteMovie(movie.id)}
+                          >
+                            <TrashFill color="#ef5350" />
+                          </a>
+                          <a href="" class="btn btn-light">
+                            {" "}
+                            Purchase
+                          </a>
+                        </td>
+                        <td>
+                          <div>
+                            <Button variant="dark" onClick={handleShow}>
+                              Session
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
 
@@ -166,7 +180,6 @@ function Carts() {
                     Make Purchase <i class="fa fa-chevron-right"></i>{" "}
                   </a>
                   <a
-                    href="#"
                     class="btn btn-light"
                     onClick={() => {
                       navigate(`/home`);
@@ -210,16 +223,16 @@ function Carts() {
                 <div class="card-body">
                   <dl class="dlist-align">
                     <dt>Total price:</dt>
-                    <dd class="text-right">Rs. 568</dd>
+                    <dd class="text-right">#############</dd>
                   </dl>
                   <dl class="dlist-align">
                     <dt>Discount:</dt>
-                    <dd class="text-right">Rs. 658</dd>
+                    <dd class="text-right">#############</dd>
                   </dl>
                   <dl class="dlist-align">
                     <dt>Total:</dt>
                     <dd class="text-right  h5">
-                      <strong>Rs.1,650</strong>
+                      <strong>###########</strong>
                     </dd>
                   </dl>
                   <hr />

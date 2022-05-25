@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "../asset/css/Navigation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../asset/img/icon.png";
@@ -23,6 +23,17 @@ function Header(prop) {
     console.log(props);
     navigate(props);
   };
+
+  useEffect(() => {
+    const userid = getCustomerUser();
+    if (userid === false) {
+      
+    } else {
+      console.log(userid);
+    }
+  }, []);   
+
+  const userid = getCustomerUser(); 
 
   const logoutfunction = (props) => {
     customerLogout();
@@ -55,9 +66,11 @@ function Header(prop) {
           >
             <Nav.Link onClick={() => routeChange("/home")}>Home</Nav.Link>
             <Nav.Link href="#movie-list">Trending Movies</Nav.Link>
-            <Nav.Link>Halls</Nav.Link>
+            <Nav.Link href="#hall-list">Halls</Nav.Link>
             {/* disabled */}
-            <Nav.Link onClick={() => routeChange("/cart")}>My Cart</Nav.Link>
+            <Nav.Link onClick={() => {
+                    navigate(`/cart/${userid}`);
+                  }}>My Cart</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <FormControl
