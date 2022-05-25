@@ -15,14 +15,16 @@ public class Theater {
     private String city;
     private Boolean close;
     private int noOfSeat;
+    private float price;
 
-    public Theater(String id, String name, String address, String city, Boolean close, int noOfSeat) {
+    public Theater(String id, String name, String address, String city, Boolean close, int noOfSeat, float price) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.close = close;
         this.noOfSeat = noOfSeat;
+        this.price = price;
     }
 
     public String getId() {
@@ -71,5 +73,13 @@ public class Theater {
 
     public void setNoOfSeat(int noOfSeat) {
         this.noOfSeat = noOfSeat;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }
