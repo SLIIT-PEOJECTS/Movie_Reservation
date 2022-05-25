@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 import Header from "./Header";
 import Footer from "./Footer";
 import "../asset/css/Cart.css";
-import { Cart } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TrashFill } from "react-bootstrap-icons";
-import { Button, Modal, Form,} from 'react-bootstrap';
+import { Button, Modal, Form, } from 'react-bootstrap';
 import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "qrcode.react";
+import env from "react-dotenv";
 
 function Carts() {
-  let {moviename} = useParams();
+  let { moviename } = useParams();
 
   const navigate = useNavigate();
   var theater;
@@ -26,41 +25,41 @@ function Carts() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const getSession = 'http://localhost:8081/session/.';
+
+  const getSession = env.BACKEND_SOURCE + '/session/.';
 
   const getTheater = 'http://localhost:8081/theater/';
-     
-  const getSessionList = () =>{
-    axios.get(`${getSession}`).then((res)=>{
-        setSessions(res.data);
-    }).catch(error => console.error(`Error: ${error}`));    
+
+  const getSessionList = () => {
+    axios.get(`${getSession}`).then((res) => {
+      setSessions(res.data);
+    }).catch(error => console.error(`Error: ${error}`));
   }
 
-  const getTheaterList = () =>{
-    axios.get(`${getTheater}`).then((res)=>{
+  const getTheaterList = () => {
+    axios.get(`${getTheater}`).then((res) => {
       setTheaters(res.data);
     }).catch(error => console.error(`Error: ${error}`))
   }
 
   const onChangeTheater = (ev) => {
-    theater=ev.target.value;
+    theater = ev.target.value;
     console.log(theater);
   };
 
   const onChangeSession = (ev) => {
-    session=ev.target.value;
+    session = ev.target.value;
     console.log(session);
   };
 
-  const onClickPayment = (ev) => {    
+  const onClickPayment = (ev) => {
     setShow(false);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getSessionList();
     getTheaterList();
-  },[])
+  }, [])
 
   return (
     <div className="App">
@@ -153,7 +152,7 @@ function Carts() {
                   <a href="https://sandbox.payhere.co/your-co/payment-link-name?amount_in_cents=4200&hide_amount=yes" class="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i class="fa fa-chevron-right"></i>{" "}
-                    
+
                   </a>
                   <a
                     href="#"
@@ -236,28 +235,28 @@ function Carts() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-          {sessions.map((data) => ( 
-            <Form.Check
-            name="group1"
-            type='radio'
-            id='session'
-            value={`${data.sessionName}`}
-            onChange={onChangeSession}
-            label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
-          />
-          ))}   
+            {sessions.map((data) => (
+              <Form.Check
+                name="group1"
+                type='radio'
+                id='session'
+                value={`${data.sessionName}`}
+                onChange={onChangeSession}
+                label={`${data.sessionName} - From ${data.fromTime} To ${data.toTime}`}
+              />
+            ))}
 
-          {theaters.map((data) => (
-            <Form.Check
-            name="group2"
-            type='radio'
-            id='theater'
-            onChange={onChangeTheater}
-            value={`${data.name}`}
-            label={`${data.name} - ${data.address} ${data.city}`}
-          />
-          ))}        
-        </Form>
+            {theaters.map((data) => (
+              <Form.Check
+                name="group2"
+                type='radio'
+                id='theater'
+                onChange={onChangeTheater}
+                value={`${data.name}`}
+                label={`${data.name} - ${data.address} ${data.city}`}
+              />
+            ))}
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

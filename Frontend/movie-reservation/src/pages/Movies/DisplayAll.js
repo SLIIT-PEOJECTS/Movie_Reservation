@@ -21,7 +21,7 @@ const DisplayAll = () => {
 
     // Fetch All Movies
     const fetchMovies = () => {
-        axios.get("http://localhost:8081/movie/", {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/movie/`, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             }
